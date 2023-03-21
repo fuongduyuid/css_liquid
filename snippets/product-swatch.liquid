@@ -1,0 +1,88 @@
+{% comment %}
+Set the extension of your color files below. Use 'png', 'jpeg', 'jpg' or 'gif'.
+{% endcomment %}
+
+{%- assign file_extension = 'png' -%}
+{%- assign swatch = option -%}
+{%- assign found_option = false -%}
+{%- assign is_color = false -%}
+{%- assign option_index = 0 -%}
+{% assign type = product.type %}
+{% assign tags = product.tags | join: ',' | escape %}
+{% assign renderKiwiSizing = false %}
+{% if type == "Apparel" and tags contains 'couple' %}
+  {% assign renderKiwiSizing = true %}
+{% elsif type == 'Sweatshirt' and tags contains 'couple-pack' %}
+  {% assign renderKiwiSizing = true %}
+{% endif %}
+{% for option in product.options %}
+  {% if option == swatch %}
+    {%- assign found_option = true -%}
+    {%- assign option_index = forloop.index0 -%}
+    {%- assign downcased_option = swatch | downcase -%}
+
+    {% if downcased_option contains 'color' or downcased_option contains 'colour' %}
+      {%- assign is_color = true -%}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+
+<div class="swatch is-flex is-flex-wrap" data-option-index="{{ option_index }}">
+  <div class="option_title">{{ swatch }}  {% if swatch == 'Size' %}
+    <span id="KiwiSizingChart"
+      data-collections="{{ product.collections | map: 'id' | join: ','}}"
+      data-tags="{{ product.tags | join: ',' | escape}}"
+      data-product="{{product.id}}"
+      data-vendor="{{product.vendor | escape}}"
+      data-product-name="{{product.title}}"
+      data-product-images="{{product.images | json| escape}}"
+      data-type="{{product.type | escape}}">
+    </span>   
+    {% elsif renderKiwiSizing and swatch == 'Select Quantity' %}
+      <span id="KiwiSizingChart"
+        data-collections="{{ product.collections | map: 'id' | join: ','}}"
+        data-tags="{{ product.tags | join: ',' | escape}}"
+        data-product="{{product.id}}"
+        data-vendor="{{product.vendor | escape}}"
+        data-product-name="{{product.title}}"
+        data-product-images="{{product.images | json| escape}}"
+        data-type="{{product.type | escape}}">
+      </span>  
+  {% endif %}
+  </div>
+  {% comment %} <span class="kiwi-sizing-placeholder"></span> {% endcomment %}
+
+  {%- assign values = '' -%}
+
+  {% for variant in product.variants %}
+    {%- assign value = variant.options[option_index] -%}
+
+    {% unless values contains value %}
+      {%- assign values = values | join: ',' -%}
+      {%- assign values = values | append: ',' | append: value -%}
+      {%- assign values = values | split: ',' -%}
+<!--       {% assign hideAluIds = '44060764045544,44060763947240,44012017647848,43976794308840,43976792309992,43976788803816,43976783823080,43976657109224,43976657109224,43976657469672,43976657535208,44060764176616,43976759017704,43976657305832,43976657207528,44060728623336,43973321064680,44060818800872,43976660943080,43973038768360' %}
+      {% assign hideDoormatIds = '44147059884264,44147059982568'%} -->
+      <input id="swatch-{{ option_index }}-{{ value | replace: ' ', '-' }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" type="radio" name="option-{{ option_index }}" aria-label="{{ value | escape }}" tabindex="0" value="{{ value | escape }}"{% if forloop.first %} checked{% endif %} />
+
+      <div tabindex="0"  value="{{ value | escape }}" data-value="{{ value | escape }}" data-id="{{ variant.id }}" class="swatch-element {% if is_color %}color{% else %}not__color{% endif %} {{ value | handle }}-swatch {% if variant.available %}available{% else %}soldout{% endif %}">
+        {% if is_color %}
+          <div class="tooltip">{{ value }}</div>
+        {% endif %}
+
+        {% if is_color %}
+          <label {% if variant.featured_image %}data-image="{{ variant.featured_image | product_img_url: '600x' }}"{% endif %} for="swatch-{{ option_index }}-{{ value | replace: ' ', '-' }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}" style="background-image: url({{ value | handle | append: '.' | append: file_extension | asset_img_url: '50x' | prepend: 'https:' }}); background-color: {{ value | split: ' ' | last | handle }};">
+            <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" aria-label="sold out" alt="sold out"/>
+          </label>
+        {% else %}
+          <label {% if variant.featured_image %}data-image="{{ variant.featured_image | product_img_url: '600x' }}"{% endif %} for="swatch-{{ option_index }}-{{ value | replace: ' ', '-' }}-{{ product.id }}{% if section.id %}-{{ section.id }}{% endif %}">
+            {{ value }}
+            <img class="crossed-out" src="{{ 'soldout.png' | asset_url }}" aria-label="sold out" alt="sold out"/>
+          </label>
+        {% endif %}
+      </div>
+    {% endunless %}
+  {% endfor %}
+
+</div>

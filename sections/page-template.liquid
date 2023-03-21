@@ -1,0 +1,17 @@
+<section class="section">
+  <div
+    class="
+      container
+      content
+      page {% if page.title == 'Order Tracking' %}small__container{% endif %}"
+  >
+    <div class="one-whole column">
+      <h1 class="mobile_title mg_bottom--zero {% if page.title == 'Order Tracking' %}text-align-left{% else %}text-align-center desktop_secondary_button{% endif %}">{{ page.title }}</h1>
+    </div>
+
+    {%
+      render 'page-multi-column',
+      content: page.content,
+    %}
+  </div>
+</section>

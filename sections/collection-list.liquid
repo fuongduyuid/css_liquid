@@ -1,0 +1,171 @@
+<script
+  type="application/json"
+  data-section-type="collection-list"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+{%- assign id = section.id -%}
+
+{% comment %} Content settings {% endcomment %}
+{%- assign title = section.settings.title | escape -%}
+{%- assign blocks = section.blocks -%}
+{% comment %} End content settings {% endcomment %}
+
+{% comment %} Advanced {% endcomment %}
+{%- assign css_class = section.settings.css_class -%}
+{%- assign custom_css = section.settings.custom_css -%}
+
+{% comment %} Section specific CSS {% endcomment %}
+{% style %}
+  {%
+    render 'css-loop',
+    css: custom_css,
+    id: id
+  %}
+{% endstyle %}
+
+{% if blocks.size > 0 %}
+  <section class="section {{ css_class }}">
+    <div class="container">
+      {% if title != blank %}
+        <div class="one-whole column center">
+          <h2 class="title mobile_title desktop_heading_section">{{ title }}</h2>
+          {% comment %}<div class="feature_divider"></div>{% endcomment %}
+        </div>
+      {% endif %}
+
+      <div class="one-whole column">
+        <div class="list-collections-wrapper">
+          <div class="list-collections equal-columns--outside-trim is-flex is-flex-wrap">
+            {% for block in blocks %}
+              {% render 'collection-list-item', block: block %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+{% if section.settings.align_height == true %}
+  <style>
+    #shopify-section-{{ section.id }} .list-collections .thumbnail img {
+      max-height: {{ section.settings.collection_height }}px;
+    }
+  </style>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Collection list",
+  "class": "shopify-section--collection-list",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collection list"
+    },
+    {
+      "type": "checkbox",
+      "id": "align_height",
+      "label": "Align height of collection images",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "collection_height",
+      "label": "Collection image height",
+      "min": 150,
+      "max": 400,
+      "step": 10,
+      "default": 200,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "frontpage_collections_per_row",
+      "label": "Collections per row",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "text_position",
+      "label": "Display Text Above Image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "meta_data_image",
+      "label": "Meta data image"
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "feature_collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "feature_collection_display_name",
+          "label": "Display Name"
+        },
+        {
+          "type": "text",
+          "id": "feature_collection_display_name--desktop",
+          "label": "Display Name On Desktop"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Collection list",
+    "category": "Collection",
+    "blocks": [
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      },
+      {
+        "type": "collection"
+      }
+    ]
+  }]
+}
+
+{% endschema %}

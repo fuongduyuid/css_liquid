@@ -1,0 +1,38 @@
+{
+  "sections": {
+    "main": {
+      "type": "list-collections-template",
+      "settings": {
+        "wide_display": true,
+        "mobile_image_crop": "none",
+        "caption_content_background": "original",
+        "collection_breadcrumb": true,
+        "display_collection_title": false,
+        "align_height": false,
+        "collection_height": 200,
+        "collections_per_row": 3,
+        "pagination_limit": 18,
+        "toggle": false
+      }
+    },
+    "1665237482ceac7697": {
+      "type": "apps",
+      "blocks": {
+        "ab0842ba-0efa-4719-83fb-db12d55fb023": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WuvAKS"
+          }
+        }
+      },
+      "block_order": [
+        "ab0842ba-0efa-4719-83fb-db12d55fb023"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "1665237482ceac7697"
+  ]
+}

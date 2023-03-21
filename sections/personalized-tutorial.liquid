@@ -1,0 +1,123 @@
+<section class="section
+  personalized_tutorial
+  {% if section.settings.wide_display == true %}
+    is-width-wide
+  {% endif %}
+  "
+
+  style="{% if section.settings.background %}background-image: url('{{section.settings.background | img_url: '5000x'}}')  {% endif %}"
+
+  >
+  <div class="container section padding_vertical--20" >
+    <div class="heading_title">
+      <p class="heading mobile_title desktop_heading_section">{{section.settings.heading_title}}</p>
+      {% if section.settings.sub_heading_title != blank %}
+        <p class="sub-heading">{{section.settings.sub_heading_title}}</p>
+      {%endif%}
+      {% if section.settings.link_video%}
+        <a class="flex-center" data-fancybox data-width="640" data-height="360" href="{{section.settings.link_video}}">
+          <span class="fIcon icon_play">
+            {%render 'play-video'%}
+          </span>
+          <span class="link_video">
+            Watch video
+          </span>
+      </a>
+      {%endif%}
+    </div>
+    {% for block in section.blocks %}
+      <div
+        class="
+          {%
+            render 'column-width',
+            value: section.blocks.size
+          %}
+          large-down--one--fourth
+          small-down--one-half
+          column
+        "
+      >
+        <div class="step">
+          <div class="image_step">
+              <img src="{{block.settings.image | img_url: '5000x'}}" alt="image step"/>
+            <p class="sub_title--block">
+              {{block.settings.sub_title}}
+            </p>
+          </div>
+          <div class="content_step">
+            <p class="title desktop_sub_title">{{block.settings.title}}</p>
+            <p class="desc is-hidden-mobile-only desktop_content_body">{{block.settings.desc}}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor%}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Personalized tutorial",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "wide_display",
+        "label": "Wide display",
+        "default": true
+      },
+      {
+        "type": "text",
+        "id": "heading_title",
+        "label": "Heading Title"
+      },
+      {
+        "type": "text",
+        "id": "sub_heading_title",
+        "label": "Sub Heading Title"
+      },
+      {
+        "type": "text",
+        "id": "link_video",
+        "label": "Link Video"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Step",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title"
+          },
+          {
+            "type": "text",
+            "id": "sub_title",
+            "label": "Sub title"
+          },
+          {
+            "type": "text",
+            "id": "desc",
+            "label": "Description"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Personalized tutorial",
+        "category": "Content"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

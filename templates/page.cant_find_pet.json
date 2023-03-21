@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {}
+    },
+    "submit": {
+      "type": "cant-find-pet",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "submit"
+  ]
+}

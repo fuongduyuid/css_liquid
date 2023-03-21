@@ -1,0 +1,424 @@
+{% if section.settings.image != nil %}
+    <header class="test banner center page_banner dark-overlay-{{ section.settings.image_darken }}">
+      <img  src="{{ section.settings.image | img_url: '100x' }}"
+            alt="{% if section.settings.image.alt != blank %}{{ section.settings.image.alt | escape }}{% else %}{{ page.title | escape }}{% endif %}"
+            class="lazyload {{ settings.image_loading_style }}"
+            data-src="{{ section.settings.image | img_url: '1400x', format: 'pjpg' }}"
+            sizes="100vw"
+            srcset="{{ section.settings.image | img_url: '480x', format: 'pjpg' }} 480w,
+                    {{ section.settings.image | img_url: '765x', format: 'pjpg' }} 765w,
+                    {{ section.settings.image | img_url: '1400x', format: 'pjpg' }} 1400w,
+                    {{ section.settings.image | img_url: '2048x', format: 'pjpg' }} 2048w"
+              />
+      <div class="caption captionOverlay--true">
+        <h1 class="headline">{{ section.settings.title }}</h1>
+        <p class="subtitle">{{ section.settings.subtitle }}</p>
+      </div>
+    </header>
+  {% endif %}
+    
+  <a name="pagecontent" id="pagecontent"></a>
+    
+  <div class="cant_find_pet--container">
+    
+    <div>
+      {% if section.settings.image == nil %}
+        <h1 class="desktop_title mobile_title text-align-center">CAN'T FIND YOUR PET?</h1>
+        <p>We have a great collection where you can upload your pet images that you may love. Let's have a look 👉 <a href = "https://pawfecthouse.com/collections/pet-upload-images", target = "_blank">HERE</a>
+        </p>	
+        <p>Kindly fill in the form below so that we can help.</p>
+        <p class="quote custom_display" style="display: none;" >Thanks for contacting us. We'll get back to you as soon as possible.</p>
+        <p class="quote custom_display error" style="display: none;" >Error occurred, please reach out by send an email to contact@pawfecthouse.com. Sorry for any inconvenience.</p>
+        <div class="feature_divider"></div>
+      {% endif %}
+      {% comment %} {{ page.content }} {% endcomment %}
+    
+      <form name='zendesk_contact_form'  enctype="multipart/form-data">
+        
+        {% if form.posted_successfully? %}
+          <p class="quote">{{ 'contact.form.post_success' | t }}</p>
+        {% endif %}
+  
+        {% if form.errors %}
+          <p class="quote">{{ 'general.forms.post_error' | t }}</p>
+  
+          {% assign message = 'contact.form.message' | t %}
+          <ul class="center">
+            {% for field in form.errors %}
+              {% if field == 'form' %}
+                <li>
+                  {{ form.errors.messages[field] }}
+                </li>
+              {% else %}
+                <li>
+                  {% assign field_name = field | replace: 'body', message %}
+                  {{ 'general.forms.post_field_error_html' | t: field: field_name, error: form.errors.messages[field] }}
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <br class="clear" />
+        <div>
+          {% assign name_attr = 'contact.form.name' | handle %}
+          <label for="contactFormName" class="inline">Full Name <span class="red">*</span></label>
+          <span class="red hidden">This field is required</span>
+          <input placeholder='Your name' type="text" id="contactFormName" name="contact[{{ name_attr }}]"  autocapitalize="words" value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}" required="required">
+        </div>
+        <div>
+          <label for="contactFormEmail"class="inline">Email <span class="red">*</span></label>
+          <span class="red hidden">This field is required</span>
+          <input type="email" id="contactFormEmail" placeholder='Your email' name="contact[email]"  autocorrect="off" autocapitalize="off" required="required">
+        </div>
+        {% comment %} Pet Breed *, Product Type *, Product Link {% endcomment %}
+        <div> 
+          {% comment %} Your Pet Breed - Required {% endcomment %}
+          <div>
+              <label for="petBreed"class="inline">Pet Breed <span class="red">*</span></label>
+              <span class="red hidden">This field is required</span>
+              <input type="text" id="petBreed" name="breed" placeholder="Your pet breed" autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+          </div>
+          {% comment %} Product Type - Required {% endcomment %}
+          <div>
+            <label for="productType"class="inline">Product Type <span class="red">*</span></label>
+            <span class="red hidden">This field is required</span>
+            <input type="text" placeholder="Key Holder, Decorative Mat, T-shirt etc" id="productType"  name="productType"  autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+          </div>
+          {% comment %} Product Link - Optional {% endcomment %}
+          <div>
+            <label for="productLink"class="inline">Product Link</label>
+            <input type="text" placeholder="Product link (if any)" id="productLink" name="productLink"  autocorrect="off" autocapitalize="off" value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+          </div>
+        </div> 
+        <div class="file_input">
+          <label for="files" class="inline">Upload Your Pet Image</label>
+          <span style="font-size:10px;" class="placeholder hidden"></span>
+          <input type='file' id="files"  name="files" >
+        </div>
+  
+        <div class="sixteen columns alpha full-width">
+          <label for="contactFormMessage"class="inline">{{ 'contact.form.message' | t }}</label>
+          <textarea rows="5" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+        {% if section.settings.text %}
+          {{ section.settings.text }}
+        {% endif %}
+        <div class="submit__area">
+          <div class="hide loader"></div>
+          <input type="button" class="global-button global-button--primary ld-over-inverse submit action_button custom_submit_zendesk show" value="{{ 'contact.form.send' | t }}" />
+        </div>
+      </form>
+    </div>
+  </div>
+  <style>
+    .cant_find_pet--container {
+      margin: 10px 20px;
+    }
+    .cant_find_pet--container input,.cant_find_pet--container textarea {
+      border-radius: 8px;
+    }
+    .cant_find_pet--container input:focus,.cant_find_pet--container textarea:focus {
+      border: 1px solid #666;
+    }
+    .cant_find_pet--container input#files {
+      border-radius: unset;
+    }
+    .file_input {
+      margin-bottom: 10px;
+    }
+    .inline {
+      display: inline !important;
+      text-transform: capitalize !important;
+    }
+    .sixteen.full-width {
+      width: 100%;
+    }
+    .flex--wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    
+    @media (max-width: 480px) {
+        .submit__area {
+            width: 100%;
+        }
+    }
+
+    .submit__area {
+      display: inline-block;
+    }
+    .show {
+      display: block;
+    }
+    .hide {
+      display: none;
+    }
+    .loader {
+      border: 5px solid #f3f3f3;
+      -webkit-animation: spin 1s linear infinite;
+      animation: spin 1s linear infinite;
+      border-top: 5px solid #fd883e;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @media (min-width: 1024px) {
+        .cant_find_pet--container {
+            margin: auto;
+            max-width: 960px;
+            padding-top: 12px;
+        }
+    }
+  </style>
+    
+  <script>
+    const hiddenDiv = document.querySelector('.hide')
+    const submitBtn = document.querySelector('.custom_submit_zendesk')
+    const nameInput = document.getElementById('contactFormName')
+    const emailInput = document.getElementById('contactFormEmail')
+    const dogBreed = document.getElementById('petBreed')
+    const productType = document.getElementById('productType')
+    const productLink = document.getElementById('productLink')
+    const commentInput = document.getElementById('contactFormMessage')
+    const filesInput = document.getElementById('files')
+    const form =document.querySelector('form.zendesk_contact_form')
+    const paragraph = document.querySelector('.quote.custom_display')
+    const errorParagraph = document.querySelector('.quote.custom_display.error')
+    const collectData = {}
+    const fileDiv = document.querySelector('.file_input')
+    const removeWarning = e=>{
+      if(e.target.id === 'files'){
+        if(e.target.value.trim().length){
+          const warnSpan = document.querySelector('.file_input span.file_input');
+        warnSpan.classList.add('hidden')
+        }
+      }else if(e.target.value.trim().length) {
+        e.target.previousElementSibling.classList.add('hidden')
+      }
+    }
+    const toggleWarning =(els, isType = false)=>{
+      if(isType){
+        const warnSpan = document.querySelector('.file_input span.file_input');
+        warnSpan.classList.remove('hidden')
+        return true;
+      }
+      const warnableElements = els.filter(i=>!i.value)
+      if(!warnableElements.length){
+        for (let index = 0; index < els.length; index++) {
+        const element = els[index];
+        const warnSpan = element.previousElementSibling
+        warnSpan.classList.add('hidden')
+      }
+        return true;
+      }
+      // console.log(warnableElements)
+      for (let index = 0; index < warnableElements.length; index++) {
+        const element = warnableElements[index];
+        const warnSpan = element.previousElementSibling
+        warnSpan.classList.remove('hidden')
+      }
+      return false;
+    }
+    const requiredFields = [nameInput, emailInput, dogBreed, productType]
+    async function submiHandler(){
+      const submitable =   toggleWarning(requiredFields)
+      if(!submitable){return}
+      paragraph.setAttribute('style', 'display: none;')
+      const files  = filesInput.files[0];
+      errorParagraph.setAttribute('style', 'display: none;')
+      errorParagraph.textContent="Error occurred, please reach out by send an email to contact@pawfecthouse.com. Sorry for any inconvenience.";
+      let formData = new FormData();     
+      formData.append("files", files);
+      formData.append("name", nameInput.value);
+      formData.append("email", emailInput.value);
+      formData.append("breed", dogBreed.value);
+      formData.append("productType", productType.value);
+      formData.append("productLink", productLink.value);
+      formData.append("body", commentInput.value);
+      submitBtn.classList.add('hide')
+      submitBtn.classList.remove('show')
+      hiddenDiv.classList.add('show')
+      hiddenDiv.classList.remove('hide')
+      const fetchRes = await fetch('https://handle-zendesk-requests.herokuapp.com/cant-find-pet', {method: "POST", body: formData});
+      {% comment %} const fetchRes = await fetch('http://localhost:1111/cant-find-pet', {method: "POST", body: formData}); {% endcomment %}
+      const result = await fetchRes.json()
+      submitBtn.classList.add('show')
+      submitBtn.classList.remove('hide')
+      hiddenDiv.classList.add('hide')
+      hiddenDiv.classList.remove('show')
+    if(result.done) {
+      window.location.href = '/pages/thank-you'
+      errorParagraph.setAttribute('style', 'display: none;')
+      paragraph.setAttribute('style', 'display: block;')
+      commentInput.value =null;
+      nameInput.value =null;
+      dogBreed.value =null;
+      filesInput.value =null;
+      emailInput.value =null;
+      fileDiv.setAttribute('style', "display: none;")
+      filesInput.files.value  = null;
+    }
+    else {
+      paragraph.setAttribute('style', 'display: none;')
+    
+      errorParagraph.setAttribute('style', 'display: block;')
+    }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+   }
+      nameInput.addEventListener('keyup',removeWarning )
+      emailInput.addEventListener('keyup',removeWarning )
+      dogBreed.addEventListener('change',removeWarning )
+      dogBreed.addEventListener('keyup',removeWarning )
+      filesInput.addEventListener('change',removeWarning )
+      submitBtn.addEventListener('click', submiHandler);
+  </script>
+    
+    {% if section.settings.show_map %}
+      {% include 'include-map' %}
+    {% endif %}
+    
+    {% schema %}
+    
+    {
+      "name": "Contact",
+      "class": "contact-section",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Banner image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "1800 x 800px recommended"
+        },
+        {
+          "type": "checkbox",
+          "id": "image_darken",
+          "label": "Darken banner image",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Get in touch"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subheading",
+          "default": "Subheading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        },
+        {
+            "type": "header",
+            "content": "Map"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_map",
+          "label": "Show map",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "wide_display",
+          "label": "Wide display",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "map_address",
+          "label": "Address",
+          "info": "Google Maps will find the exact location"
+        },
+        {
+          "type": "range",
+          "id": "map_height",
+          "min": 300,
+          "max": 600,
+          "step": 10,
+          "unit": "px",
+          "label": "Map height",
+          "default": 400
+        },
+        {
+          "type": "range",
+          "id": "zoom_level",
+          "min": 1,
+          "max": 20,
+          "step": 1,
+          "unit": "x",
+          "label": "Map zoom level",
+          "default": 16
+        },
+        {
+          "type": "image_picker",
+          "id": "map_image",
+          "label": "Image",
+          "info": "Displayed when map isn't loaded"
+        },
+        {
+          "type": "header",
+          "content": "API key"
+        },
+        {
+          "type": "text",
+          "id": "api_key",
+          "label": "Google Maps API key",
+          "info": "You’ll need to [register a Google Maps API Key](https://help.shopify.com/manual/using-themes/troubleshooting/map-section-api-key) to display the map"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_pin",
+          "label": "Show pin",
+          "info": "Requires use of API key",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "map_style",
+          "label": "Map color scheme",
+          "options": [
+            {
+              "value": "default",
+              "label": "Default"
+            },
+            {
+              "value": "aubergine",
+              "label": "Aubergine"
+            },
+            {
+              "value": "night",
+              "label": "Night"
+            },
+            {
+              "value": "retro",
+              "label": "Retro"
+            },
+            {
+              "value": "silver",
+              "label": "Silver"
+            }
+          ],
+          "default": "default",
+          "info": "Requires use of API key"
+        }
+      ]
+    }
+    
+{% endschema %}
+    

@@ -1,0 +1,548 @@
+$(document).ready(function() {
+
+  // ======GLOBAL======
+  $(document).on('click',function(event){
+    // close sort_by dropdown if is showing
+   if(!$(event.target).closest('.sort_heading').length){
+      var isHiddenSortDropdown = $('.sort_custom .sort_dropdown').hasClass('d-none')
+      if (!isHiddenSortDropdown) {
+        $('.sort_custom .sort_dropdown').addClass('d-none')
+      }
+    }
+  });
+
+
+
+
+  var screen = $(window).width()
+  var isMobile = screen < 798
+
+  //========toggle to show sub-menu====================
+  $('.custom_header .mobile_nav').on('click', function() {
+    $('.custom_header .sub__nav').toggleClass('iat')
+    $('.custom_header .mobile_nav').find('div').toggleClass('open')
+  })
+
+  //========toggle to show sub-menu====================
+  var height_header_mobi = $('#header').height()
+  var sections = $('.mobile_nav-fixed--true.promo-banner--show .section-wrapper')
+  sections.css('margin-top' , height_header_mobi);
+
+  var header = $('.custom_header');
+  var sticky = header.offset().top;
+
+  $(window).scroll(function(){
+    var scroll = $(window).scrollTop();
+    if (isMobile) {
+    // scroll on mobile
+      {% comment %}
+      if (scroll >= 30){
+        $('.search-ic').removeClass('hiddenn')
+        $('.custom_search_mobile').addClass('hiddenn')
+      } else {
+        $('.search-ic').addClass('hiddenn')
+        $('.custom_search_mobile').removeClass('hiddenn')
+      }
+      {% endcomment %}
+    } else {
+    // scroll on desktop
+      {% comment %}
+      var sub_nav = $('.custom_header .sub__nav'),
+          menuIco = $('.custom_header .mobile_nav'),
+          menuHamburger = $('.custom_header .mobile_nav').find('div');
+      var header_height = header.innerHeight();
+
+      if (scroll >= sticky){
+        header.addClass('sticky');
+        menuIco.removeClass('iat')
+        sub_nav.addClass('iat');
+        menuHamburger.removeClass('open')
+        $('.section-wrapper').css('padding-top' , header_height);
+      } else { 
+        $('.section-wrapper').css('padding-top' , 0);
+        header.removeClass('sticky');
+        sub_nav.removeClass('iat');
+        menuIco.addClass('iat')
+      }
+      {% endcomment %}
+      // handle sticky menu desktop
+      var header = $('header')
+
+      if (scroll > header.height()) {
+        $('.sticky__menu--custom').addClass('sticky')
+      } else {
+      $('.sticky__menu--custom').removeClass('sticky')
+      $('.search-ic').removeClass('hiddenn')
+      $('.custom_search_mobile').addClass('hiddenn')
+      }
+    }
+  });
+
+  //========toggle search form in header mobile====================
+  var h_search = $('.custom_search_mobile').height()
+  $('.search-ic').on('click', function () {
+    $(this).addClass('hiddenn')
+    $('.custom_search_mobile').removeClass('hiddenn')
+    $('.custom_search_mobile .snize-input-style').focus()
+    sections.css('margin-top' , height_header_mobi);
+  })
+  $('.search-x-ic').on('click', function () {
+    $('.snize-ac-results').css('display', 'none')
+    $('.search-ic').removeClass('hiddenn')
+    $('.custom_search_mobile').addClass('hiddenn')
+    sections.css('margin-top', height_header_mobi - h_search);
+  })
+
+  //========CUSTOME Menu slide tabs Custom====================
+  var dropdown_menu = $('.custom--true .mobile-menu-container')
+  $('.menu_links_parent li span.c_link').each(function (idx, item) {
+    $(item).on('click', function () {
+      dropdown_menu.scrollTop(0)
+      $(this).next().addClass('activee')
+      $('.dropdown_menu_custom--true').addClass('noScroll')
+      $(this).next().find('ul > li > span.c_link').each(function (i, _item) {
+        $(_item).on('click', function () {
+          dropdown_menu.scrollTop(0)
+          $(this).parent().closest('.sub-menuu').addClass('activee')
+          $(this).parent().closest('.menu-links-sub1').addClass('backk')
+        })
+      })
+      $(this).parent().closest('.c_dropdown__menu').addClass('backk')
+    })
+  })
+  // handle btn BACK
+  $('.menu-links-sub1 > .sub-header > i').each(function (idx, item) {
+    $(item).on('click', function () {
+      $('.dropdown_menu_custom--true').removeClass('noScroll')
+      $(this).parent().closest('.sub-menuu').removeClass('activee')
+      $(this).parent().closest('.c_dropdown__menu').removeClass('backk')
+    })
+  })
+  $('.menu-links-sub2 > .sub-header > i').each(function (idx, item) {
+    $(item).on('click', function () {
+      $(this).parent().closest('.menu-links-sub1').removeClass('backk')
+      $(this).parent().closest('.sub-menuu').removeClass('activee')
+    })
+  })
+  // handle btn close Menu mobile
+
+  $('.fixed-header-mobile .mobile_nav').on('click', function () {
+    var isOpen = $(this).find('div').hasClass('openn')
+    if(isOpen) {
+      $(this).find('div').removeClass('openn')
+      $(this).find('div').removeClass('open')
+      $('body').removeClass('is-active');
+      $('.custom--true .mobile-menu-container').attr('data-animation-state', 'closed')
+
+      // handle reset parent menu
+      $('.dropdown_menu_custom--true').removeClass('noScroll')
+      $('.c_dropdown__menu').removeClass('backk')
+      $('.sub-menuu').removeClass('activee')
+      $('.sub-menuu').removeClass('backk')
+    } else {
+      $(this).find('div').addClass('openn')
+      $('.custom--true .mobile-menu-container').attr('data-animation-state', 'open')
+
+      // calc spacing from header to menu mobile
+      var dropdown_menu = $('.custom--true > .mobile-menu-container')
+      dropdown_menu.scrollTop(0)
+      var topbar = $('.top-bar')
+      var dropdown_top = dropdown_menu.offset().top - $(document).scrollTop()
+      dropdown_menu.css({'position': 'fixed', 'top': `${dropdown_top}px`, 'overflow-y': 'scroll', 'height': `calc(100vh - ${dropdown_top}px)`})
+      $('.custom--true .c_dropdown__menu').css('min-height', `calc(100vh - ${dropdown_top}px)`)
+    }
+  })
+
+  //========START HANDLE TOGGLE FILTER BUTTON COLLECTINON====================
+  var overlaySidebar = $('.sidebar__custom .overlay')
+  var sidebar = $('.sidebar__custom .sidebar')
+  function closeSide() {
+    $(this).removeClass('show')
+    overlaySidebar.removeClass('show');
+    sidebar.removeClass('show');
+    $('body').removeClass('modal-open')
+  }
+  $('.btn__filter').on('click', function () {
+    overlaySidebar.addClass('show')
+    sidebar.find('.faceted-filter-form').scrollTop(0)
+    sidebar.addClass('show')
+    $('body').addClass('modal-open')
+  })
+  $('.sidebar__custom .overlay').on('click', closeSide)
+  $('.sidebar__custom .closeSidebar').on('click', closeSide)
+  
+  //========START Show all/ less filter sidebar====================
+  $('.sidebar__custom .action_show').each(function (idx, item) {
+    $(item).on('click', function () {
+      $(this).siblings(".tags__filter--hidden").toggleClass('showw')
+      $(this).removeClass('showw')
+      $(this).siblings(".more").toggleClass('showw')
+      $(this).siblings(".less").toggleClass('showw')
+    })
+  })
+  //========START TOGGLE SORTING_CUSTOM====================
+
+  $('.sort_heading').on('click', function() {
+    $('.sort_custom .sort_dropdown').toggleClass('d-none')
+  })
+  $('.sort_custom .sort_dropdown_option').each(function (idx, item) {
+    $(item).on('click', function () {
+      $('.sort_custom .sort_dropdown').addClass('d-none')
+      const sortValue = $(this).attr('id');
+      if (sortValue) {
+        // Set the query string and redirect
+        const queryString = new URLSearchParams(document.location.search);
+        queryString.set('sort_by', sortValue);
+        window.location.search = queryString;
+      }
+    })
+  })
+
+  // ====== HANDLE PROGESS_PRICE IN CUSTOME_FILTER======
+  var range = document.querySelector(".slider_price .progress_range");
+  if (range != null) {
+    const rangeInput = document.querySelectorAll(".range-input input"),
+    priceInput = document.querySelectorAll(".price-input input");
+
+    //set default
+    let minEle = document.querySelector(".range-min")
+    let maxEle = document.querySelector(".range-max")
+    let _min = parseInt(minEle.value)
+    let _max = parseInt(maxEle.value)
+    let _maxRange = parseInt(maxEle.getAttribute('max'))
+    range.style.left = ((_min / _maxRange) * 100) + "%";
+    range.style.right = 100 - ((_max / _maxRange) * 100) + "%";
+
+    // onchange price input
+    let priceGap = 1;
+    priceInput.forEach(input =>{
+        input.addEventListener("input", e =>{
+            let minPrice = parseInt(priceInput[0].value),
+            maxPrice = parseInt(priceInput[1].value);
+            
+            if((maxPrice - minPrice >= priceGap) && maxPrice <= rangeInput[1].max){
+                if(e.target.classList.contains("input-min")){
+                    rangeInput[0].value = minPrice;
+                    range.style.left = ((minPrice / rangeInput[0].max) * 100) + "%";
+                    priceInput[1].setAttribute('min', rangeInput[0].value )
+                }else{
+                    rangeInput[1].value = maxPrice;
+                    range.style.right = 100 - (maxPrice / rangeInput[1].max) * 100 + "%";
+                    priceInput[0].setAttribute('max', rangeInput[1].value )
+                }
+            }
+        });
+    });
+    rangeInput.forEach(input =>{
+        input.addEventListener("input", e =>{
+            let minVal = parseInt(rangeInput[0].value),
+            maxVal = parseInt(rangeInput[1].value);
+            if((maxVal - minVal) < priceGap){
+                if(e.target.className === "range-min"){
+                    rangeInput[0].value = maxVal - priceGap
+                }else{
+                    rangeInput[1].value = minVal + priceGap;
+                }
+            }else{
+                priceInput[0].value = minVal;
+                priceInput[1].value = maxVal;
+                range.style.left = ((minVal / rangeInput[0].max) * 100) + "%";
+                range.style.right = 100 - (maxVal / rangeInput[1].max) * 100 + "%";
+            }
+        });
+    });
+  }
+
+  // ====== Handle modal preview on cart
+  const handleOpenModalClick = (src)=>{
+    const imgEl = document.querySelector('.cus-preview-modal-wrapper #cus-preview-img')
+    imgEl.src = src;
+    const modalItem = document.querySelector('.cus__modal__preview');
+    modalItem.classList.toggle('open')
+  }
+  const handleCloseModal = ()=>{
+      const modalItem = document.querySelector('.cus__modal__preview');
+      modalItem.classList.toggle('open')
+  }
+  const allCartItemImages = document.querySelectorAll('.cart__item .cart__item--image img');
+  const allCartItemTrigger = Array.from(document.querySelectorAll('.review_design--trigger'));
+  allCartItemImages.forEach(element=>{
+      const src = element.src;
+      element.addEventListener('click', ()=>handleOpenModalClick( src))
+  })
+  allCartItemTrigger.forEach(element=>{
+      const src = element.dataset.src;
+      element.addEventListener('click', ()=>handleOpenModalClick( src))
+  })
+  document.querySelector('.cus-close').addEventListener('click', ()=>handleCloseModal())
+  document.addEventListener('click', function (event){
+    const modalItem = document.querySelector(".cus__modal__preview");
+    if (modalItem.classList.contains("open")) {
+        if (
+            event.target.className !== "cus-preview-modal-wrapper" &&
+            event.target.className !== "cus-preview-modal-content" &&
+            event.target.className !== "preview__image--cart" &&
+            event.target.className !== "preview-design" &&
+            event.target.className !== "review_design--trigger--text" &&
+            event.target.className !== "review_design--trigger--icon"
+          ) {
+            handleCloseModal();
+          }
+    }
+  })
+})
+
+
+/*= ===========================================================================
+  Start of contact form functionality
+============================================================================== */
+const checkRequiredValue = ({selector, isFile})=>{
+  const item = document.querySelector(selector);
+  if(!item){return true}
+  const itemValue = item.value
+  if(!isFile && !itemValue){
+    return false
+  }
+  if(isFile){
+    const files =  item.files[0];
+    if(!files){
+      return false
+    }
+    return true;
+  }
+  return true;
+}
+const zendeskUrl = 'https://handle-zendesk-requests.herokuapp.com';
+const requiredFieldsContactForm = [
+  {
+  selector: '#contactFormName',
+  isFile: false,
+  text: "Please fill in your name."
+  },
+  {
+    selector: '#contactFormEmail',
+    isFile: false,
+    text: "Please fill in a correct email."
+  },
+  {
+    selector: '#contactFormRequestType',
+    isFile: false,
+    text: "Please select one value."
+  },
+ 
+]
+$('#contactFormRequestType').on('change', function() {
+  if(this.value === 'Damage/Defective Product' || this.value === 'Modify/Cancel My Order'){
+    $('#contactFormAttachment').attr("required", "required");
+    $('.attachment_red').removeClass('hide')
+    if(!requiredFieldsContactForm.find(i=>i.selector === "#contactFormAttachment" )){
+      requiredFieldsContactForm.push( {
+        selector: '#contactFormAttachment',
+        isFile: true,
+        text: "Please select an image."
+      },)
+    }
+  } else {
+    $('#contactFormAttachment').removeAttr("required")
+    $('.attachment_red').addClass('hide')
+    if(requiredFieldsContactForm.find(i=>i.selector === "#contactFormAttachment" )){
+      const matchedIndex = requiredFieldsContactForm.findIndex(i=>i.selector === "#contactFormAttachment");
+      requiredFieldsContactForm.splice(matchedIndex, 1)
+    }
+  }
+});
+
+
+async function ajaxSubmitZendesk (e) {
+  e.preventDefault();
+  requiredFieldsContactForm.push({
+    selector: '#contactFormMessage',
+    isFile: false,
+    text: "Please fill in the text area."
+  })
+  const filesInput = document.getElementById('contactFormAttachment')
+  const nameInput = document.getElementById('contactFormName')
+  const emailInput = document.getElementById('contactFormEmail')
+  const requestType = document.getElementById('contactFormRequestType')
+  const orderNumber = document.getElementById('contactFormOrderNumber')
+  const message = document.getElementById('contactFormMessage')
+  const loader = document.querySelector('.contact_template--content .loader');
+  const submitButton = document.querySelector('.contact_form-submit_btn');
+  loader.classList.remove('hide')
+  submitButton.classList.add('hide')
+
+  if(!filesInput.files[0] && filesInput.getAttribute('required')==='required'){
+    requiredFieldsContactForm.push({
+      selector: '#contactFormAttachment',
+      isFile: true,
+      text: "Please select an image."
+    })
+  }
+  let stop = false;
+  let requiredIndex = 0;
+  while (!stop && requiredIndex < requiredFieldsContactForm.length){
+    const item = requiredFieldsContactForm[requiredIndex];
+    const checkTurn = checkRequiredValue(item)
+    requiredIndex+=1;
+    if(!checkTurn){
+      loader.classList.add('hide')
+      submitButton.classList.remove('hide')
+      stop = true;
+      $('.zendesk_contact_form').find(item.selector).focus();
+      alert(item.text)
+    }
+  }
+  if(!stop){
+    let formData = new FormData();
+
+    formData.append("files", filesInput.files[0]);
+    formData.append("name", nameInput.value);
+    formData.append("email", emailInput.value);
+    formData.append("subject", requestType.value);
+    formData.append("body", message.value);
+    formData.append("orderId", orderNumber.value);
+  
+    const fetchRes = await fetch(zendeskUrl, {
+      body: formData,
+      method: 'POST',
+      mode: 'cors'
+    });
+  
+    if(fetchRes.ok){
+      // move to thank you page
+      loader.classList.add('hide')
+      submitButton.classList.remove('hide')
+      filesInput.value = null;
+      nameInput.value = null;
+      emailInput.value = null;
+      message.value = null;
+      orderNumber.value = null;
+      window.location.href = '/pages/thank-you'
+    }else {
+      alert("System Error, Please try again later or send us an direct email to contact@pawfecthouse.com")
+      loader.classList.add('hide')
+      submitButton.classList.remove('hide')
+    }
+  }
+
+}
+
+$('.contact_form-submit_btn').on('click', ajaxSubmitZendesk);
+/*= ===========================================================================
+  Begin dmca contact
+============================================================================== */
+const requiredFieldsDMCAForm = [
+  {selector: '#textfield-2', isFile: false, text: "Please enter your name"},
+  {selector: '#email-3', isFile: false, text: "Please enter your email"},
+  {selector: '#textfield-5', isFile: false, text: "Please enter link to counterfit product"},
+  {selector: '#textarea-6', isFile: false, text: "Please enter the violation reason"},
+  {selector: '#textfield-8', isFile: false, text: "Please enter link to the original work"},
+  {selector: '#textfield-9', isFile: false, text: "Please enter description of the original work"},
+  {selector: '#textfield-10', isFile: true, text: "Please attach a file"},
+]
+$(document).ready(function(){
+  const zendeskUrl2 = 'https://handle-zendesk-requests.herokuapp.com/dmca';
+
+  async function ajaxSubmitZendesk2 (e) {
+    e.preventDefault();
+
+
+    let formData2 = new FormData();
+
+    const nameInput = document.getElementById('textfield-2')
+    const emailInput = document.getElementById('email-3')
+    const counterfitLink = document.getElementById('textfield-5')
+    const violationReason = document.getElementById('textarea-6')
+    const originalWork = document.getElementById('textfield-8')
+    const originDesc = document.getElementById('textfield-9')
+    const files = document.getElementById('textfield-10')
+    
+    formData2.append("name", nameInput.value);
+    formData2.append("email", emailInput.value);
+    formData2.append("counterfitLink", counterfitLink.value);
+    formData2.append("violationReason", violationReason.value);
+    formData2.append("originalWork", originalWork.value);
+    formData2.append("originDesc", originDesc.value);
+    formData2.append("files", files.files[0]);
+
+    let arrayInfo2 = ['#textfield-2','#email-3','#textfield-5','#textarea-6','#textfield-8','#textfield-9','#textfield-10'];
+
+    const flags = [];
+    var flag_2 = false;
+
+    $.each(arrayInfo2, function(index,value) {
+
+      var self = value;
+        if(($(self).val() == 0 || $(self).val() == '' || $(self).val() == undefined)){
+          flags.push(self)
+          $(self).addClass('is-empty').removeClass('is-filled');
+        } else{
+          $(self).removeClass('is-empty').addClass('is-filled');
+           flag_2 = true;
+          if ($(self).attr('type') == 'email'){
+            if($(self).val().match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/)){
+              $(self).removeClass('is-empty').addClass('is-filled');
+               flag_2 = true;
+            } else{
+              $(self).addClass('is-empty').removeClass('is-filled');
+               flag_2 = false;
+               flags.push(self)
+            }
+          }
+        }
+    })
+    if(flags.length > 0){
+      $('html, body').animate({
+        scrollTop: $(flags[0]).offset().top - 110
+      }, 1000);
+    }
+    if(flag_2 && flags.length === 0 ){
+    $('.submit__btn_group .ld-ring').css('opacity', 1);
+      const fetchRes2 = await fetch(zendeskUrl2, {
+        body: formData2,
+        method: 'POST',
+        mode: 'cors'
+      })
+      if(fetchRes2.ok){
+        // move to thank you page
+        window.location.href = '/pages/thank-you'
+      }else {
+        alert("System Error, Please try again later or send us an direct email to contact@pawfecthouse.com")
+        loader.classList.add('hide')
+        submitButton.classList.remove('hide')
+      }
+    }
+  }
+
+  function inputOnChange(){
+    let arrayInfo = ['#textfield-2','#email-3','#textfield-5','#textarea-6','#textfield-8','#textfield-9','#textfield-10'];
+
+    $.each(arrayInfo, function(index,value) {
+      var self = value;
+
+      $(self).keyup(function() {
+        var item_value = $(this).val();
+
+        if (item_value.length == 0 || item_value == '' || item_value == undefined){
+          $(this).addClass('is-empty').removeClass('is-filled');
+        } else {
+          $(this).removeClass('is-empty').addClass('is-filled');
+
+          if ($(this).attr('type') == 'email') {
+            if (item_value.match(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/)){
+              $(this).removeClass('is-empty').addClass('is-filled');
+            } else{
+              $(this).addClass('is-empty').removeClass('is-filled');
+            }
+          }
+        }
+      });
+    });
+  }
+
+  $('.contact_form-submit_btn_2').on('click', ajaxSubmitZendesk2);
+
+  inputOnChange();
+})
+
+

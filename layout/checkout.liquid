@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>{{ page_title }}</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    <style>
+      .product-table .product__description__property {
+        display: none !important;
+      }
+      .product-thumbnail {
+        height: 160px;
+        width: 160px;
+      }
+      .product__description {
+        text-align: left;
+      }
+      .product-table .product__description__name, .product-table .product__description__variant {
+        display: block;
+        width: 100%;
+      }
+      @media (max-width: 480px) {
+        .product-table, .product-table td, .product-table th, .product-table tr {
+          display: flex;
+          flex-flow: row wrap;
+          justify-content: center;
+        }
+        .product-table tr.product {
+          padding-bottom: 10px;
+          position: relative;
+          width: 320px;
+          margin-bottom: 10px;
+        }
+
+        .product-table td, .product-table th {
+          min-width: 320px;
+          padding: 0;
+          width: 320px;
+        }
+        .product-thumbnail {
+          height: 320px;
+          width: 320px;
+        }
+        .product-table td.product__price span {
+          background-color: #fff;
+          border: 1px solid #dedede;
+          border-radius: 12px;
+          color: #323232;
+          padding: 4px;
+          text-align: left;
+          width: 76px;
+        }
+
+        .product-table td.product__price {
+          justify-content: flex-end;
+          position: absolute;
+          right: -12px;
+          top: -12px;
+          z-index: 2;
+          align-items: center;
+          gap: 2px;
+        }
+        .product-table td.product__price .order-summary__small-text {
+          font-size: 14px;
+        }
+      }
+
+    </style>
+    {% include 'teeinblue-scripts' %}
+</head>
+  <body>
+    {{ skip_to_content_link }}
+
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+            {% comment %}
+            <script>
+              (function($) {
+                $(document).on("page:load page:change", async function() {
+                  const isCheckout =window.location.pathname.includes('/checkouts/')
+                  let itemsInCart   
+                  try {
+                    if(isCheckout){                                         
+                      // Add your customizations for checkout page                        
+                      if(localStorage.getItem('cartItems')) {
+                        itemsInCart = JSON.parse(localStorage.getItem('cartItems'))
+                      }
+                      if(!(itemsInCart instanceof Array)){
+                        console.log(itemsInCart instanceof Array)
+                        itemsInCart = await fetch('/cart.js').then(res=>res.json())
+                        console.log({itemsInCart})
+                        itemsInCart = itemsInCart.items;
+                      }
+                    }
+                    else {
+                      // order status page custom
+                      const {checkout} = Shopify;
+                      itemsInCart = checkout.line_items
+                    }
+                    // element in checkout page
+                    const productRendersInSidebar = Array.from(document.querySelectorAll('.order-summary__section__content .product-table tr.product td.product__image img'))
+                    for (let index = 0; index < itemsInCart.length; index+=1){
+                      const item = itemsInCart[index]
+                      const {key, properties,image } = item;
+          
+                      if(properties['_customily-preview']){
+                        // run cart/change.js for this id line_item
+                        productRendersInSidebar[index].src = properties['_customily-preview']
+                      }
+                    }
+                  }catch (err){
+                    console.log(err)
+                  }
+          
+                });
+              })(Checkout.$);
+            </script>
+            {% endcomment %}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+  </body>
+<!--   <script type="text/javascript">
+    integrateKlaviyoTracking();
+   
+    function integrateKlaviyoTracking() {
+      const checkoutEmail = document.getElementById('checkout_email')
+      if (checkoutEmail) {
+        checkoutEmail.addEventListener('input', () => {
+          try {
+            const email = checkoutEmail.value
+            window.localStorage.setItem('spyCheckoutEmail', email)
+          } catch (error) {
+            // Do nothing
+          }
+        })
+      }
+    }
+    
+  </script> -->
+<!--   <script src="//cdn.shopify.com/s/files/1/0563/9988/8539/files/actio_custom_checkout_7142b677-4214-4ccc-92ec-4f077eaf8313.js?v=1650948665" type="text/javascript"></script> -->
+  {{ 'uid_checkout_custom_scripts.js' | asset_url | script_tag }}
+  <style>
+    .product-thumbnail__wrapper img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  </style>
+</html>

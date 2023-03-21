@@ -1,0 +1,124 @@
+{% comment %}
+FDuy - UID
+Params:
+- cart: the cart object itself
+- stick_checkout_mobile: stick the checkout button on bottom of device
+- continue_url: the url for hitting continue shopping
+{% endcomment %}
+{% assign totalPrice =  cart.total_price | money_with_currency  %}
+{% assign totalPriceWithoutName =  cart.total_price | money  %}
+<div class="subtotal flex--column">
+    <p class="cart_subtotal js-cart_subtotal">
+        <span class="right mobile_third_btn">
+        <span class="money">
+            {%
+            render 'price-element',
+            price: cart.total_price
+            %}
+        </span>
+        </span>
+        <span class='left mobile_content_body desktop_cart_total--left'>{{ 'cart.general.subtotal' | t }}</span>
+    </p>    
+    {% if cart.cart_level_discount_applications != blank %}
+        <p class="cart_discounts js-cart_discounts sale">
+        {% for discount_application in cart.cart_level_discount_applications %}
+            <span class="cart_discounts--title">{{ discount_application.title }}</span>
+            <span class="cart_discounts--price">
+            -
+            <span class="money">
+                {%
+                render 'price-element',
+                price: discount_application.total_allocated_amount
+                %}
+            </span>
+            </span>
+        {% endfor %}
+        </p>
+    {% endif %}
+
+
+    {% comment %} {%- capture taxes_shipping_checkout -%}
+        {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+        {{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+        {%- elsif cart.taxes_included -%}
+        {{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}
+        {%- elsif shop.shipping_policy.body != blank -%}
+        {{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+        {%- else -%}
+        {{ 'cart.general.tax_and_shipping' | t }}
+        {%- endif -%}
+    {%- endcapture -%}
+
+    <p class="cart-message meta">{{ taxes_shipping_checkout }}</p> {% endcomment %}
+
+    {% if display_savings and total_saving > 0 or display_savings and cart.total_discount > 0 %}
+        <p class="cart_savings js-cart_savings sale">
+        <span class="right">
+            <span class="money">
+            {% assign total_savings = total_saving | plus: cart.total_discount %}
+            {%
+                render 'price-element',
+                price: total_savings
+            %}
+            </span>
+        </span>
+        <span class="font_weight--400">{{ 'layout.general.savings' | t }}</span>
+        </p>
+    {% endif %}
+    <p class="cart--note_processed_currency">Orders will be processed in USD</p>
+    {% comment %} {% unless shop.enabled_currencies.size > 1 %}
+        <p>
+        <small>{{ 'cart.general.orders_processed_in_currency_html' | t: currency: shop.currency }}</small>
+        </p>
+    {% endunless %} {% endcomment %}
+
+    {% if section.settings.display_special_instructions %}
+        <label for="note">{{ 'cart.general.note' | t: shop_name: shop.name }}:</label>
+        <textarea id="note" name="note" rows="2">{{ cart.note }}</textarea>
+    {% endif %}
+
+    {% if settings.display_tos_checkbox %}
+        <p>
+        <input type="checkbox" class="tos_agree" id="cart_agree" required />
+
+        <label class="tos_label" for="cart_agree">
+            {{ 'cart.general.agree_to_terms_html' | t }}
+        </label>
+
+        {% if settings.tos_page != blank %}
+            <a href="{{ settings.tos_page }}" target="_blank" class="tos_icon">{{ 'cart.general.view_terms' | t }}</a>
+        {% endif %}
+        </p>
+    {% endif %}
+
+    {% if section.settings.cart_message != blank %}
+        {{ section.settings.cart_message }}
+    {% endif %}
+
+    <p class="tos_warning checkout_button">
+        <button type="submit" class="global-button global-button--primary add_to_cart mobile_primary_btn" id="checkout" name="checkout" data-cart-checkout-button>
+            
+                    {% comment %} <p class="is-flex mgbt--zero flex__align--center mgbt--zero flex-center"> {% endcomment %}
+                    <span class="icon-lock">
+                    </span>
+                    <span class='float--right is-hidden-none-mobile checkout--text'>{{ 'cart.general.checkout' | t }}</span><span class='float--right is-hidden-small is-hidden-medium'>{{ 'cart.general.checkout--desktop' | t }}</span>
+                    {% comment %} </p> {% endcomment %}
+                    <span class='float--right is-hidden-none-mobile'>{{totalPriceWithoutName}}</span></button>
+    </p>
+    {% comment %} <object type="image/svg+xml" data="{{ 'cart_buyer_protection.svg' | asset_url }}" class="cart_buyer_protection"></object> {% endcomment %}
+    {% render 'cart-buyer-protection', class:"cart_buyer_protection" %}
+    {% if content_for_additional_checkout_buttons and section.settings.display_additional_buttons %}
+        <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
+        {{ content_for_additional_checkout_buttons }}
+        </div>
+    {% endif %}
+
+    {% if cart.item_count > 0 %}
+        <a class="continue-shopping" href="{{ continue_url }}">
+        {{ 'cart.general.continue_shopping' | t }}
+        </a>
+    {% endif %}
+</div>
+{% comment %} <div class="padding_top--12">
+    <a class="is-hidden-desktop-only text__align--center cart_continue_shopping is-hidden-desktop-only" href="{{ continue_url }}">{{ 'cart.general.continue_shopping' | t }}</a>
+</div> {% endcomment %}

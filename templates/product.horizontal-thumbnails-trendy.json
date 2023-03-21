@@ -1,0 +1,217 @@
+{
+  "sections": {
+    "sidebar": {
+      "type": "product-sidebar",
+      "disabled": true,
+      "settings": {
+        "toggle": false
+      }
+    },
+    "main": {
+      "type": "product-horizontal-thumbnails-trendy-template",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "e053364e-8bd2-4f3b-8604-27b372dac16f": {
+          "type": "shopify:\/\/apps\/judge-me-product-reviews\/blocks\/preview_badge\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "display_savings": true
+          }
+        },
+        "form": {
+          "type": "form",
+          "settings": {}
+        },
+        "description": {
+          "type": "description",
+          "disabled": true,
+          "settings": {}
+        },
+        "4b34a430-2979-4c2e-8458-83ab349ddedf": {
+          "type": "cut_off_information",
+          "disabled": true,
+          "settings": {
+            "cut_off_title": "CHRISTMAS 2022 CUTOFF DATE",
+            "cut_off_sub_title": "For guaranteed Christmas delivery, be sure to place your orders BY:"
+          }
+        },
+        "f43971ae-5abb-42e5-a723-2c92058f5036": {
+          "type": "shipping_information",
+          "settings": {}
+        },
+        "ab2cb770-d63c-4708-afc2-09669c7a6fd5": {
+          "type": "collapsible-tab",
+          "settings": {
+            "collapsible_tab_heading": "Description",
+            "collapsible_tab_text": "<p>Use this text to share information about your product.<\/p>",
+            "collapsible_tab_content": "description",
+            "collapsible_tab_open": true,
+            "collapsible_tab_css_class": "collabsible_tab--description is-hidden-desktop-only",
+            "mobile_only": true
+          }
+        },
+        "c88be3e4-1d0f-4c40-91e6-f7fa09b75df5": {
+          "type": "collapsible-tab",
+          "settings": {
+            "collapsible_tab_heading": "Shipping & Return",
+            "collapsible_tab_text": "<p>Use this text to share information about your product.<\/p>",
+            "collapsible_tab_content": "shipping",
+            "collapsible_tab_open": false,
+            "collapsible_tab_css_class": "collabsible_tab--shipping is-hidden-desktop-only",
+            "mobile_only": true
+          }
+        },
+        "e69a028e-3d0f-4cf6-8f2c-74843dd6e256": {
+          "type": "collapsible-tab",
+          "settings": {
+            "collapsible_tab_heading": "Satisfaction Guarantee",
+            "collapsible_tab_text": "<p>Use this text to share information about your product.<\/p>",
+            "collapsible_tab_content": "guarantee",
+            "collapsible_tab_open": false,
+            "collapsible_tab_css_class": "collabsible_tab--gurantee is-hidden-desktop-only",
+            "mobile_only": true
+          }
+        },
+        "d4041536-47ea-426c-979d-a49cc05d2559": {
+          "type": "tabs",
+          "settings": {
+            "show_product_description": false,
+            "show_tabs_below_product_gallery": false,
+            "tab_heading_1": "Description",
+            "tab_text_1": "<p>Use this text to share information about your product.<\/p>",
+            "tab_content_1": "description",
+            "tab_heading_2": "Shipping & Return",
+            "tab_text_2": "<p>Use this text to share information about your product.<\/p>",
+            "tab_content_2": "shipping",
+            "tab_heading_3": "Satisfaction Guarantee",
+            "tab_text_3": "",
+            "tabs_css_class": "is-hidden-mobile-only",
+            "tab_content_3": "guarantee"
+          }
+        },
+        "f0dbfba0-7d4c-4117-b8f6-12093ccac422": {
+          "type": "share",
+          "settings": {
+            "share_css_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "e053364e-8bd2-4f3b-8604-27b372dac16f",
+        "price",
+        "form",
+        "description",
+        "4b34a430-2979-4c2e-8458-83ab349ddedf",
+        "f43971ae-5abb-42e5-a723-2c92058f5036",
+        "ab2cb770-d63c-4708-afc2-09669c7a6fd5",
+        "c88be3e4-1d0f-4c40-91e6-f7fa09b75df5",
+        "e69a028e-3d0f-4cf6-8f2c-74843dd6e256",
+        "d4041536-47ea-426c-979d-a49cc05d2559",
+        "f0dbfba0-7d4c-4117-b8f6-12093ccac422"
+      ],
+      "settings": {
+        "rec_product_list": "{{ product.metafields.custom.references.value }}",
+        "product_breadcrumb": false,
+        "media_position": "is-flex-row",
+        "set_product_height": false,
+        "product_height": 500,
+        "video_looping": false,
+        "product_thumbs": true,
+        "gallery_arrows": true,
+        "enable_product_lightbox": true,
+        "activate_zoom": true,
+        "slideshow_speed": 0,
+        "slideshow_animation": "slide",
+        "desktop_layout": "four-sevenths",
+        "thumbnail_position": "bottom",
+        "enable_thumbnail_slider": true,
+        "css_class": "",
+        "enable_cut_off_notice": true
+      }
+    },
+    "recommendations": {
+      "type": "product-recommendations",
+      "disabled": true,
+      "settings": {
+        "show_product_recommendations": true,
+        "wide_display": false,
+        "show_origin_price": false,
+        "divide_title_with_content": false,
+        "product_recommendations_style": "grid",
+        "product_recommendations_heading": "More items to Consider",
+        "products_per_row": 4,
+        "recommended_products_limit": 4
+      }
+    },
+    "68770552-d72c-456b-b0e9-bb8180bafdc6": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Best Sellers",
+        "collection_description": true,
+        "collection": "best-sellers",
+        "target_leading_collection": "",
+        "collection_style": "grid",
+        "show_origin_price": false,
+        "collection_with_banner": false,
+        "banner_position": "left",
+        "products_per_row--mobile": 2,
+        "products_limit--mobile": 8,
+        "products_per_row--desktop": 4,
+        "products_limit--desktop": 8,
+        "more_btn": false,
+        "css_class": "product_page--product_featured_collection",
+        "custom_css": ""
+      }
+    },
+    "16611624750e9b24fd": {
+      "type": "apps",
+      "blocks": {
+        "a4b17107-3f93-4419-83ed-aff5e09ebba0": {
+          "type": "shopify:\/\/apps\/judge-me-product-reviews\/blocks\/review_widget\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
+        "3a0929c6-e862-4a95-a4b0-c0887b564689": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WuvAKS"
+          }
+        }
+      },
+      "block_order": [
+        "a4b17107-3f93-4419-83ed-aff5e09ebba0",
+        "3a0929c6-e862-4a95-a4b0-c0887b564689"
+      ],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Sign up & enjoy 10% OFF",
+        "newsletter_text": "<p>Give us a chance to personalize your stories<\/p>",
+        "newsletter_section_text_align": "center",
+        "banner_image_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0563\/9988\/8539\/files\/NewLetterBackground.svg?v=1660882133",
+        "css_class": "newsletter_section_with_background",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "sidebar",
+    "main",
+    "recommendations",
+    "68770552-d72c-456b-b0e9-bb8180bafdc6",
+    "16611624750e9b24fd",
+    "newsletter"
+  ]
+}

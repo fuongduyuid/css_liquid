@@ -1,0 +1,120 @@
+{% assign producTypeShippingInfo = "
+    Doormat|2-3|14-19,
+    Doormat US|6-8|12-18,
+    patio mat|6–8|18-22,
+    Mugs|2-3|7-13,
+    T-shirt|2-4|7-13,
+    Wood sign|3-5|15-20,
+    Metal Sign|2-3|14-19,
+    Flag|4-6|8-15,
+    Tumbler|3-5|18-23,
+    Pet Bowl|5-7|12-19,
+    dishwasher cover|6-8|21-25,
+    Ornament |3-4| 12-16,
+    Memorial Sign |3-5| 15-20,
+    Poster|2-3|7-13,
+    Christmas Stocking|3-5|15-20,
+    Camping Tarp|6–8|18-22,
+    Heteromorphic Wood Sign | 2-3 | 15-20,
+    Acrylic Stake | 3-4 | 16-21,
+    Keychain | 2-3 | 15 - 20,
+    Key Hanger | 3-4 | 16-20,
+    Clogs | 8-10 | 20-25
+    " %}
+    
+{% assign vendorShippingInfo = "
+    c|2-5|10-15,
+    dreamship|2-5|10-15,
+    a|3-5|18-12,
+    b|5-8|20-25,
+    t|5-8|20-25,
+    j|5-8|20-25,
+    z|2-3|5-8,
+    gearment|5-7|13-18,
+" %}
+{% assign vendorNamespace = product.vendor %}
+{% assign productTypeNamespace = product.type %}
+
+{% assign minShippingTime = product.metafields.custom.shipping_time_min %}
+{% assign maxShippingTime = product.metafields.custom.shipping_time_max %}
+{% assign minProcessingTime = product.metafields.custom.processing_time_min %}
+{% assign maxProcessingTime = product.metafields.custom.processing_time_max %}
+
+<!-- DO NOT TOUCH BELOW THIS LINE -->
+
+{% assign concatinatedString = producTypeShippingInfo  | append: vendorShippingInfo | append: 'other|3-7|11-22,' %}
+{% assign vendor = product.vendor | downcase | strip %}
+{% assign splitedProductTypeShippingInfo = concatinatedString | split: "," %}
+{% assign shipFastestDays = '' %}{% assign shipSlowestDays ='' %}{% assign orderDeliveredFastestDays='' %}{% assign orderDeliveredSlowestDays ='' %}
+
+{% assign type = product.type | downcase | strip %}
+{% assign testSting = 'no value' %}
+{% assign shipFastestDays = rule[1] | split: '-' | first | plus: 0 %}
+{% for item in splitedProductTypeShippingInfo %}
+    {% assign rule = item | split: '|' %}
+    {% assign el = rule[0] | downcase | strip %}
+    {% if el == type or el == vendor or el == 'other'  %}
+        {% assign testSting = el %}
+            {% assign shipFastestDays = rule[1] | split: '-' | first | plus: 0 %}
+            {% if minProcessingTime %}{% assign shipFastestDays = minProcessingTime %}{% endif %}
+            {% assign shipSlowestDays = rule[1] | split: '-' | last | plus: 0 %}
+            {% if maxProcessingTime %}{% assign shipSlowestDays = maxProcessingTime %}{% endif %}
+            {% assign orderDeliveredFastestDays = rule[2] | split: '-' | first | plus: 0 %}
+            {% if minShippingTime %}{% assign orderDeliveredFastestDays = minShippingTime %}{% endif %}
+            {% assign orderDeliveredSlowestDays = rule[2] | split: '-' | last | plus: 0 %}
+            {% if maxShippingTime %}{% assign orderDeliveredSlowestDays = maxShippingTime %}{% endif %}
+        {% break %}
+    {% endif %}
+{% endfor %}
+
+{% comment %}assigning variables of lower bound shipping time{% endcomment %}
+{% assign orderShipFastest = shipFastestDays | times: 24 | times: 60 | times: 60 %}
+{% assign shipFastestText =  'now' | date: "%s" | plus: orderShipFastest | date: "%b %e" %}
+{% assign orderShipFastestSplited = shipFastestText | split: " " %}
+{% assign orderShipFastestMonth = orderShipFastestSplited[0] %}
+{% assign orderShipFastestDate = orderShipFastestSplited[1] %}
+
+{% comment %}assigning variables of upper bound shipping time{% endcomment %}
+{% assign orderShipSlowest = shipSlowestDays | times: 24 | times: 60 | times: 60 %}
+{% assign shipSlowestText =  'now' | date: "%s" | plus: orderShipSlowest | date: "%b %e" %}
+{% assign orderShipSlowestSplited = shipSlowestText | split: " " %}
+{% assign orderShipSlowestMonth = orderShipSlowestSplited[0] %}
+{% assign orderShipSlowestDate = orderShipSlowestSplited[1] %}
+
+{% comment %}check if lower bound and upper bound are in the same month the render the text respectively{% endcomment %}
+{% assign isShipSameMonth = false %}
+{% if orderShipFastestMonth == orderShipSlowestMonth %}
+    {% assign isShipSameMonth = true %}
+{% endif %}
+{% assign shipText = orderShipFastestMonth |append: ' '| append: orderShipFastestDate | append: '-' | append:
+    orderShipSlowestMonth |append: ' ' | append: orderShipSlowestDate %}
+{% unless isShipSameMonth == false %}
+    {% assign shipText = orderShipFastestMonth |append: ' '| append: orderShipFastestDate | append: '-' | append:
+        orderShipSlowestDate %}
+{% endunless %}
+<div class='shipping-time-eta'>{{shipFastestDays}}-{{shipSlowestDays}}/{{orderDeliveredFastestDays}}-{{orderDeliveredSlowestDays}}/{{shipText}}</div>
+
+{% comment %}assigning variables of lower bound develivered time{% endcomment %}
+{% assign orderDeliveredFastest = orderDeliveredFastestDays | times: 24 | times: 60 | times: 60 %}
+{% assign deliveredFastestText = 'now' | date: "%s" | plus: orderDeliveredFastest | date: "%b %e" %}
+{% assign orderDeliveredFastestSplited = deliveredFastestText | split: " " %}
+{% assign orderFastestMonth = orderDeliveredFastestSplited[0] %}
+{% assign orderFastestDate = orderDeliveredFastestSplited[1] %}
+
+{% comment %}assigning variables of upper bound develivered time{% endcomment %}
+{% assign orderDeliveredSlowest = orderDeliveredSlowestDays | times: 24 | times: 60 | times: 60 %}
+{% assign deliveredSlowestText = 'now' | date: "%s" | plus: orderDeliveredSlowest | date: "%b %e" %}
+{% assign orderDeliveredSlowestSplited = deliveredSlowestText | split: " " %}
+{% assign orderSlowestMonth = orderDeliveredSlowestSplited[0] %}
+{% assign orderSlowestDate = orderDeliveredSlowestSplited[1] %}
+
+{% comment %}check if lower bound and upper bound are in the same month the render the text respectively{% endcomment %}
+{% assign isSameMonth = false %}
+{% if orderFastestMonth == orderSlowestMonth %}
+    {% assign isSameMonth = true %}
+{% endif %}
+{% assign deliveredText = orderFastestMonth |append: ' '| append: orderFastestDate | append: '-' | append: orderSlowestMonth |append: ' ' | append: orderSlowestDate %}
+{% if isSameMonth == true %}
+    {% assign deliveredText = orderFastestMonth |append: ' '| append: orderFastestDate | append: '-' | append:
+        orderSlowestDate %}
+{% endif %}

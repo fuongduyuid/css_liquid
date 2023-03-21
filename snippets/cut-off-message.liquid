@@ -1,0 +1,54 @@
+{% assign vendor = product.vendor %}
+{% assign product_type = product.type %}
+{% assign us_cutoff_date = 'Nov 28th' %}
+{% assign none_us_cutoff_date = 'Nov 28th' %}
+{% assign cutOffDate = '' %}
+
+{% if product.id == 8052925923560 %}
+  {% assign cutOffDate = 'Dec 3rd' %}
+{% elsif product_type == 'Apparel' or product_type == 'Poster' or product_type == 'Canvas' or product_type == 'Mugs' %}
+  {% assign cutOffDate = 'Dec 12th' %}
+{% elsif product_type == 'Sweatshirt' or product_type == 'Kid Sweatshirt' or product_type == 'Christmas Stocking' %}
+  {% assign cutOffDate = 'Nov 28th' %}
+{% elsif product_type == 'Ornament' %}
+  {% assign cutOffDate = 'Dec 7th' %}
+{% elsif product_type == 'Doormat US' %}
+  {% assign cutOffDate = '' %}
+{% elsif product.id == 7829250048232
+  or product.id == 7829242478824
+  or product.id == 7829243560168
+  or product.id == 7829250277608
+  or product.id == 7829252014312
+  or product.id == 7867748155624
+  or product.id == 7867669053672
+  or product.id == 7864179327208
+  or product.id == 7864170807528
+%}
+  {% assign cutOffDate = '' %}
+{% elsif vendor == 'Z' %}
+  {% if product_type == 'Blanket' or product_type == 'Basketball' %}
+    {% assign cutOffDate = '' %}
+  {% endif %}
+{% elsif vendor == 'D' %}
+  {% if product_type == 'Camp Mug' %}
+    {% assign cutOffDate = '' %}
+  {% endif %}
+{% else %}
+  {% assign cutOffDate = 'Nov 30th' %}
+{% endif %}
+
+{% assign occasion = 'Christmas day' %}
+
+{% if cutOffDate != blank %}
+  <div class="cut_off_notice">
+    <div class="cut_off_notice--text">
+      <span
+        >📦<em>
+          Orders placed after
+          <b class="text--red">{{ cutOffDate }} may not</b>
+          be delivered by {{ occasion -}}
+        </em>
+      </span>
+    </div>
+  </div>
+{% endif %}

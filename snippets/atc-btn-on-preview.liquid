@@ -1,0 +1,57 @@
+<script type="text/javascript">
+  
+    const defaultNoticeInnerHTML = `<p class="customily_modal_preview--title">Please check the preview carefully</p>
+    <p class="customily_modal_preview--notice_content"><em>Make sure the below customization is correct to receive your item faster</em>
+    </p>`
+
+    function handleFakeBtnClick(t) {
+      t.stopPropagation(),
+        document.querySelector(".btn-preview-add-to-cart").classList.add("running");
+      document.querySelector(".add_to_cart").click();
+    }
+    function mainFunc(item) {
+      if (item.classList !== null && item.classList !== void 0) {
+        if (item.classList.contains('canvas-container')) {
+          var t = document.querySelector(".add_to_cart");
+          
+          e = document.querySelector(".customily-modal-preview-only .main");
+          t.classList.add("btn-preview-add-to-cart");
+          e.appendChild(t);
+          t.addEventListener("click", function (t) {
+            return handleFakeBtnClick(t);
+          });
+          const formWrapper = document.querySelector('.product_form');
+          {% comment %} const productType = formWrapper.dataset.productType; {% endcomment %}
+          var modifyNoticeEl = document.createElement('div');
+          modifyNoticeEl.className = 'customily_modal_preview--modify_notice';
+          
+          modifyNoticeEl.innerHTML = defaultNoticeInnerHTML;
+          e.appendChild(modifyNoticeEl)
+        }
+      }
+    }  
+    (function () {
+      try {
+        const observer = new MutationObserver(function (t) {
+          t.forEach(function (t) {
+            if (t.addedNodes) {
+              for (var r = 0; r < t.addedNodes.length; r++) {
+                var e = t.addedNodes[r];
+                mainFunc(e);
+              }
+            }
+      
+          });
+        });
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: false,
+          characterData: false,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+
+</script>

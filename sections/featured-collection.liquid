@@ -1,0 +1,341 @@
+<script
+  type="application/json"
+  data-section-type="featured-collection"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+{% assign collection = collections[section.settings.collection] %}
+
+{% comment %} Section specific CSS {% endcomment %}
+{% style %}
+  {%
+    render 'css-loop',
+    css: section.settings.custom_css,
+    id: section.id
+  %}
+{% endstyle %}
+
+{% if collection == blank %}
+  {%- assign section_onboarding = true -%}
+  {% comment %} Assign product length to be selected limit for onboarding {% endcomment %}
+  {%- assign products_length = section.settings.products_limit | plus: 0 -%}
+{% else %}
+  {%- assign section_onboarding = false -%}
+{% endif %}
+{% assign targetUrl = collection.url %}
+{% if section.settings.target_leading_collection != blank %}
+  {% assign targetUrl = section.settings.target_leading_collection %}
+{% endif %}
+<div class="{{ section.settings.css_class }}">
+  {% if section.settings.title != blank %}
+    <section class="section featured__collection--title">
+      <div class="container">
+        <div class="one-whole column center homepage_content">
+          {% if section.settings.title != blank %}
+            <a href="{{ targetUrl }}">
+              <h2 class="title mobile_title desktop_heading_section">{{ section.settings.title | escape }}</h2>
+            </a>
+            {% comment %}<div class="feature_divider"></div>{% endcomment %}
+          {% endif %}
+
+          {% if section.settings.collection_description and collection.description != blank %}
+            <div class="featured-collection__description rte">
+              {{ collection.description }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
+  {% if section.settings.collection_style == 'slider' %}
+    <div class="js-product-slider homepage-product-slider full-width--true {% if section.settings.products_per  == 2 or section.settings.products_per  == 4 or section.settings.products_per  == 6 %}even-num-slides{% endif %} featured-collection__products">
+      {% if section_onboarding == false %}
+        {% if collection.products.size > 0 %}
+          {%
+            render 'product-slider',
+            limit: section.settings.products_limit,
+            products: collection.products,
+            collection: collection,
+            per_slide: section.settings.products_per,
+            featured_collection: collection,
+          %}
+        {% endif %}
+      {% else %}
+        <div class="slider-gallery products-slider products-length-{{ products_length }}"
+             data-products-per-slide="{{ section.settings.products_per }}"
+             data-products-limit="{{ section.settings.products_limit }}"
+             data-products-available="{{ products_length }}">
+          {% for i in (1..section.settings.products_limit) %}
+            {%- assign per_slide_num = section.settings.products_per -%}
+
+            <div class="gallery-cell thumbnail {% if products_length > per_slide_num %}visible-{{ section.settings.products_per }}{% else %}visible-{{ products_length }}{% endif %}">
+              <div class="product-wrap">
+                <div class="relative product_image">
+                  <a href="#">
+                    <object class="placeholder-image">
+                      {% capture num %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                      {{ 'product-' | append: num | placeholder_svg_tag: 'placeholder-svg placeholder-svg--product' }}
+                    </object>
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  {% else %}
+    {% if section_onboarding == false %}
+      {% capture banner %}
+        {% if section.settings.collection_with_banner and section.settings.banner_image != blank %}
+          <div class="banner__collection  one-whole column is-hidden-mobile-only is-hidden-small is-hidden-medium">
+            <a href="{{ collection.url }}">
+            <img  src="{{ section.settings.banner_image | img_url: '5000x'}}" alt="banner collection"/>
+            </a>
+          </div>
+        {% endif %}
+      {% endcapture %}
+      {% capture banner_mobile %}
+        {% if section.settings.collection_with_banner and section.settings.banner_image_moblie != blank %}
+          <div class="banner__collection  one-whole column is-hidden-none-mobile">
+            <a href="{{ collection.url }}">
+              <img  src="{{ section.settings.banner_image_moblie | img_url: '5000x'}}" alt="banner collection"/>
+            </a>
+          </div>
+        {% endif %}
+      {% endcapture %}
+      <section class="section featured__collection--products__list">
+        <div class="container
+          banner__collection--{{section.settings.collection_with_banner}}--{{section.settings.banner_position}} {% unless section.settings.collection_with_banner %}none_banner{% endunless %}">
+          {{ banner_mobile }}
+          {% if section.settings.banner_position == 'left'%}
+            {{ banner }}
+          {% endif %}
+
+          <div class="one-whole column is-hidden-desktop-only banner__collection--{{section.settings.collection_with_banner}}--products">
+            {%
+              render 'product-loop',
+              limit: section.settings.products_limit--mobile | plus: 1,
+              products: collection.products,
+              collection: collection,
+              skip_product: product,
+              products_per_row: section.settings.products_per_row--mobile,
+              show_origin_price: section.settings.show_origin_price
+            %}
+          </div>
+          <div class="one-whole column is-hidden-mobile-only banner__collection--{{section.settings.collection_with_banner}}--products">
+            {%
+              render 'product-loop',
+              limit: section.settings.products_limit--desktop | plus: 1,
+              products: collection.products,
+              collection: collection,
+              skip_product: product,
+              products_per_row: section.settings.products_per_row--desktop,
+              show_origin_price: section.settings.show_origin_price
+            %}
+          </div>
+          {% if section.settings.banner_position == 'right'%}
+            {{ banner }}
+          {% endif %}
+        </div>
+        {% if section.settings.more_btn%}
+  
+          <a class="viewmore_btn btn__default btn__primary mobile_title" href="{{ targetUrl }}">View more</a>
+        {% endif %}
+      </section>
+    {% else %}
+      <section class="section featured__collection--products__list">
+        <div class="product-list product-list--collection">
+          <div class="container">
+            {% for i in (1..section.settings.products_limit) %}
+              {% comment %}{% assign collection_group = products | map: 'section.id' %}{% endcomment %}
+              {%- assign collection_group_thumb = collection_group | append : 'thumb' -%}
+              {%- assign collection_group_mobile = collection_group | append : 'mobile' -%}
+
+              <div class="{% render 'column-width', value: section.settings.products_per %} column {% if settings.collection_secondary_image != blank and product.media[1] != blank %}has-secondary-media-swap{% endif %} thumbnail {% if settings.mobile_products_per_row == '1' %}medium-down--one-half small-down--one-whole{% else %}medium-down--one-half small-down--one-half{% endif %}">
+                <div class="product-wrap {% if settings.collection_secondary_image != blank and product.media[1] != blank %}has-secondary-media-swap{% endif %}">
+                  <div class="relative product_image">
+                    <a href="#">
+                      {% capture num %}{% cycle "1", "2", "3", "4", "5", "6" %}{% endcapture %}
+                      {{ 'product-' | append: num | placeholder_svg_tag: 'placeholder-svg placeholder-svg--product' }}
+                    </a>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Featured collection",
+  "class": "shopify-section--featured-collection",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Featured collection"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_description",
+      "label": "Show description",
+      "default": true
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "text",
+      "id": "target_leading_collection",
+      "label": "Collection when click See more",
+      "info": "If leave blank will go to the selected collection above. Else please enter the full url of the target collection"
+    },
+    {
+      "type": "radio",
+      "id": "collection_style",
+      "label": "Collection layout",
+      "default": "grid",
+      "options": [
+        {
+          "value": "slider",
+          "label": "Slider"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "show_origin_price",
+      "label": "Show origin price",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_with_banner",
+      "label": "Featured collection with Banner",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image_moblie",
+      "label": "Banner mobile"
+    },
+    {
+      "type": "radio",
+      "id": "banner_position",
+      "label": "Banner Position",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "range",
+      "id": "products_per_row--mobile",
+      "label": "Products per row mobile",
+      "min": 2,
+      "max": 7,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "products_limit--mobile",
+      "label": "Limit products mobile",
+      "min": 2,
+      "max": 50,
+      "step": 1,
+      "default": 9
+    },
+    {
+      "type": "range",
+      "id": "products_per_row--desktop",
+      "label": "Products per row desktop",
+      "min": 2,
+      "max": 7,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "products_limit--desktop",
+      "label": "Limit products desktop",
+      "min": 2,
+      "max": 50,
+      "step": 1,
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "more_btn",
+      "label": "Show View more Button",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Advanced"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Learn more](https://help.outofthesandbox.com/hc/en-us/articles/360022329373)"
+    },
+    {
+      "type": "text",
+      "id": "css_class",
+      "label": "CSS Class"
+    },
+    {
+      "type": "textarea",
+      "id": "custom_css",
+      "label": "Custom CSS"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured collection",
+      "category": "Collection"
+    }
+  ],
+  "templates": [
+    "404",
+    "article",
+    "blog",
+    "cart",
+    "collection",
+    "list-collections",
+    "index",
+    "page",
+    "product",
+    "search"
+  ]
+}
+
+{% endschema %}

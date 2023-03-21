@@ -1,0 +1,12 @@
+<div class="item-content">
+    {{ product.description | split: '
+    <!-- split -->' | first }}
+
+  {% comment %}
+    {% if productType contains 'stole' %}
+    <div class="notice--delivery">Due to the high demand for this product, the production and shipping time may take
+      <strong>5 days longer</strong> than usual. We're really sorry for this inconvenience
+    </div>
+    {% endif %}
+   {% endcomment %}
+</div>

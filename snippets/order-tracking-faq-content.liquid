@@ -1,0 +1,14 @@
+{% if contentValue == 'when_to_receive'%}
+    <p class="order_tracking_faq--content">Pawfect House team always works around the clock to make sure your order is delivered as soon as possible</p>
+    <p class="order_tracking_faq--content">The total processing and shipping time is normally <strong>10-20 business days</strong> for orders from the US and <strong>15-25 business days</strong> for international orders if there are no unexpected postal problems. For more detailed information, please refer to our timeframe: <strong><a href="https://pawfecthouse.com/pages/shipping-and-delivery" >Shipping and Delivery page</a></strong></p>
+
+    <p class="order_tracking_faq--content">The shipping notice with <strong>tracking information</strong> will be sent to your <strong>order email</strong> from which you can easily track its route. Please kindly check the spam/junk folder as well in case it isn’t in your inbox.</p>
+    <p class="order_tracking_faq--content"><strong>Note:</strong> Due to the global impact of COVID-19 and <strong>seasonal demands,</strong> production and delivery times might be delayed by up to 5 business days more than the standard time frame. We apologize for the inconvenience.</p>
+{% elsif contentValue == 'tracking_not_work' %}
+    <p class="order_tracking_faq--content">You should see tracking events within <strong>48-96 hours</strong> after you have received the tracking number/ID. The reason for this time lag is that in most cases the first tracking events only show up once the shipment was handed over to the local facility.</p>
+
+    <p class="order_tracking_faq--content">Note: Some carriers take a longer time for the next information to appear. (Might apply for t-shirts, posters, canvas or mugs orders).</p>
+{% elsif contentValue == 'tracking_not_moving' %}
+    <p class="order_tracking_faq--content">We understand that it might be frustrating to not get real-time updates on your order's current location. During peak season, it is normal if your package is shipped without tracking information, but you can be assured that your package will be delivered within our committed timeframe. This can be due to (but not limited to) weather incidents, customs clearance, or carrier backlogs.</p>
+    <p class="order_tracking_faq--content">In case your order is stuck for <strong>10-15 days,</strong> please email us via: <strong><a href="https://pawfecthouse.com/pages/contact-us">Contact Us</a></strong> ,so that the problem can be sorted out as quickly as possible.</p>
+{% endif%}

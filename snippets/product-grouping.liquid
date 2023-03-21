@@ -1,0 +1,49 @@
+{% comment %}
+---------------- PRODUCT GROUPING ----------------
+{% endcomment %}
+{% assign group_tags = product.tags | where: "group-" %}
+{% assign has_group_tags = false %}
+{% if group_tags.size > 0 %}
+{% assign has_group_tags = true %}
+{% endif %}
+{% for tag in group_tags %}
+<script>
+  (function () {
+    {% comment %} let requestUrl = "/collections/all/{{ tag }}?view=json"; {% endcomment %}
+    let requestUrl = "/collections/key-holder/products/home-sweet-home-parents-kids-anniversary-gifts-gift-for-couples-husband-wife-personalized-key-hanger.json";
+    console.log(requestUrl);
+    let request = new XMLHttpRequest();;
+    request.open("GET", requestUrl);
+    request.onload = function () {
+      if (request.status >= 200 && request.status < 300) {
+        let products = JSON.parse(request.response);
+        console.log(products)
+        // Sort products A-Z
+        products.sort(function (a, b) {
+          if (a.title < b.title) { return -1; }
+          if (a.title > b.title) { return 1; }
+          return 0;
+        });
+
+        // loop through each product
+        if (products.length > 1) {
+          $.each(products, function (key, product) {
+            // --------------
+            // DO STUFF HERE FOR EACH PRODUCT
+            const existed = $(`div[data-grp-data="${product.id}"]`);
+            if (existed.length === 0) {
+              $('#ProductGroupThumbnails')
+              .append(`<div class="swatch-element group_el" data-grp-data="${product.id}" ><a href="${product.url}"> <span>${product.custom_name.replace('custom_name-','')}</span></a></div>`)
+                .find('.group_el')
+                .last()
+                .addClass(product.id === {{ product.id }} ?"active" : "")
+        }
+      });
+    }
+
+  };
+        };
+  request.send();
+    }) ();
+</script>
+{% endfor %}

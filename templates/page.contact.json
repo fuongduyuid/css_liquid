@@ -1,0 +1,42 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-template",
+      "settings": {
+        "wide_display": true,
+        "mobile_image_crop": "none",
+        "contact_heading": "Get in touch",
+        "contact_subheading": "Subheading",
+        "caption_content_background": "original",
+        "contact_text": "",
+        "show_map": false,
+        "map_wide_display": true,
+        "map_address": "",
+        "map_height": 400,
+        "zoom_level": 16,
+        "api_key": "",
+        "show_pin": true,
+        "map_style": "default"
+      }
+    },
+    "166523836192769ae5": {
+      "type": "apps",
+      "blocks": {
+        "c3973fe5-3bbb-4723-afc9-bbb94865047d": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WuvAKS"
+          }
+        }
+      },
+      "block_order": [
+        "c3973fe5-3bbb-4723-afc9-bbb94865047d"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "166523836192769ae5"
+  ]
+}

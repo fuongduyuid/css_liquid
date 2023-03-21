@@ -1,0 +1,20 @@
+{% if product.metafields.custom.grouping_products %}
+    {% assign recommended_products =  product.metafields.custom.grouping_products.value %}
+    {% assign recommended_size = recommended_products | size %}
+    <div class="reference__products--wrapper">
+      <span class="reference__products--title">{% if product.metafields.custom.product_grouping %}{{product.metafields.custom.product_grouping}}{% else %}Other versions{% endif %}:</span>
+      {% for val in recommended_products %}
+        {% assign splittedValue = val | split: ',' %}
+        {% assign displayName = splittedValue | first %}
+        {% assign url = splittedValue | last %}
+        <span class="reference__products--item">
+          <a href="{{url }}">
+            {% comment %} {{ product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy' }} {% endcomment %}
+            {{displayName}}
+          </a>
+        </span>
+        {% unless forloop.index == recommended_size %}<span class="reference__products--separator"> | </span>{% endunless %}
+      {% endfor %}
+    </div>
+
+{% endif %}

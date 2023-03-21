@@ -1,0 +1,35 @@
+{% comment %}
+    Renders a list of product's price (regular, sale, unit)
+    Accompanies product forms and meant to be updated dynamically
+    Accepts:
+    - variant: {Object} Variant Liquid object (optional)
+    - product: {Object} Product Liquid object (optional)
+    - show_vendor: {Boolean} Show the product's vendor depending on the section setting (optional)
+
+    Usage:
+    {% include 'product-price', variant: current_variant, product: product %}
+{% endcomment %}
+{%- liquid
+  if variant.title
+    assign compare_at_price = variant.compare_at_price
+    assign price = variant.price
+    assign available = variant.available
+  else
+    assign compare_at_price = 1999
+    assign price = 1999
+    assign available = true
+  endif
+
+  assign money_price = price | money
+-%}
+
+<div class="price__pricing-group">
+  <div class="price__sale">
+    {{ money_price }}
+  </div>
+  {% if compare_at_price > price %}
+  <div class="price__regular">
+    <del>{{ compare_at_price | money }}</del>
+  </div>
+  {% endif %}
+</div>

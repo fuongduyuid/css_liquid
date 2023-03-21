@@ -1,0 +1,25 @@
+<div class="pop_up--element">
+    <a
+        class="popup__link"
+        href="javascript:;"
+        data-fancybox
+        data-src="#product-popup__lightbox-{{ popup_name }}"
+        data-type="inline"
+        data-no-instant
+      >
+        <span class="popup__text">
+          {{ section.settings.poup_title | escape }}
+        </span>
+    </a>
+</div>
+<div
+    class="product-popup__lightbox custom_popup--lightbox"
+    id="product-popup__lightbox-{{ popup_name }}"
+    style="display: none;"
+  >
+    <div class="product-popup__lightbox-wrapper">
+      <div class="rte">
+       {% render 'order-tracking-popup-content' %}
+      </div>
+    </div>
+</div>

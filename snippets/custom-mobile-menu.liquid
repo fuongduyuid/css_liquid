@@ -1,0 +1,119 @@
+<div class="c_dropdown__menu">
+  <div class="priority__btns">
+    {% for link in linklists[priority_links].links%}
+       <a href="{{link.url}}" class="link_btn">
+        {{ link.title}} 
+        <i class="bi">
+          {% if link.title == "Trending Now"%}
+            {% render 'mobile-header-fire'%}
+          {% elsif link.title == "New Arrivals" %}
+            {% render 'mobile-header-star' %}
+          {% elsif link.title == "Our Reviews" %}
+            {% render 'mobile-header-smile' %}
+          {% else %}
+            {% render 'mobile-header-tracking' %}
+          {% endif %}
+        </i>
+      </a>
+    {% endfor %}
+  </div>
+  <div class="menu_links">
+    <ul class="menu_links_parent">
+      {% for link in linklists[menu].links%}
+        {% if linklists[link.handle] == empty%}
+          <li><a class="c_link" href="{{link.url}}">{{link.title}}</a></li>
+        {% else %}
+          <li>
+            <span class="c_link" >
+              {{link.title}}
+              <span>
+                {% render 'arrow-down'%}
+              </span>
+            </span>
+            <div class="sub-menuu menu-links-sub1">
+              <div class="sub-header">
+                  <i class="bi bi-arrow-left-short back_btn"></i>
+                  {{link.title}}
+              </div>
+              <ul >
+                {% for link in linklists[link.handle].links%}
+                  {% if linklists[link.handle] == empty%}
+                    <li><a class="c_link" href="{{link.url}}">{{link.title}}</a></li>
+                  {% else %}
+                    <li>
+                      <span class="c_link" >
+                        {{link.title}}
+                        <span >
+                          {% render 'arrow-down'%}
+                        </span>
+                      </span>
+                      <div class="sub-menuu menu-links-sub2">
+                        <div class="sub-header">
+                          <i class="bi bi-arrow-left-short back_btn"></i>
+                          {{link.title}}
+                        </div>
+                        <ul>
+                          {% for link in linklists[link.handle].links %}
+                            <li><a class="c_link" href="{{ link.url }}">{{ link.title }}</a></li>
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="help-center">
+      {% for link in linklists[help-center_menu].links%}
+        <a class="help-center__link" href="{{link.url}}">{{link.title}}</a>
+      {% endfor %}
+  </div>
+  <div class="footer__block d-none">
+    <span class="footer__block--title">{{ linklists['information'].title }} </span>
+    <ul class="footer__block--links">
+    {% for link in linklists['information'].links%}
+      <li>
+        <a class="footer__block--link" href="{{link.url}}">{{link.title}}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+  <div class="footer__block d-none">
+    <span class="footer__block--title">{{ linklists['policies'].title }} </span>
+    <ul class="footer__block--links">
+    {% for link in linklists['policies'].links%}
+      <li>
+        <a class="footer__block--link" href="{{link.url}}">{{link.title}}</a>
+      </li>
+    {% endfor %}
+    </ul>
+  </div>
+
+  {% if section.settings.get_in_touch != blank %}
+    <div class="footer__block d-none">
+      <span class="footer__block--title" >Get In Touch</span>
+      <div class="footer__block-getintouch">
+        {{ section.settings.get_in_touch }}
+      </div>
+    </div>
+  {% endif %}
+  <div class="footer__block--payment_methods">
+    <div class="footer__block--social-icons">
+      {% render 'social-icons' %}
+    </div>
+    <span class="guarantee_title flex-center" >
+      {%render 'guarantee-icon'%}
+      <span>Guaranteed safe and secure checkout via</span>
+    </span>
+    <div class="payment_methods">
+      {% for type in shop.enabled_payment_types %}
+        {{ type | payment_type_svg_tag: class:'payment-icon' }}
+      {% endfor %}
+    </div>
+  </div>
+</div>

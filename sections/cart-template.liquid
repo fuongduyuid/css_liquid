@@ -1,0 +1,326 @@
+<script
+  type="application/json"
+  data-section-type="cart-template"
+  data-section-id="{{ section.id }}"
+>
+</script>
+
+{% liquid
+  assign continue_url = routes.all_products_collection_url
+
+  if section.settings.continue_shopping_url != blank
+    assign continue_url = section.settings.continue_shopping_url
+  endif
+%}
+{% assign totalItems = cart.item_count %}
+
+<section class="section">
+  <div class="container content padding_top--15 {% if cart.item_count == 0 %}cart--empty{% else %}cart--wrapper{% endif %}">
+    <div class="one-whole column cart--title">
+      <h1 class="mg_bottom--zero text__align--center mobile_title heading__page">{{ 'cart.general.title' | t | append: " (" | append: totalItems | append: ")"}}</h1>
+    </div>
+    {% if cart.item_count == 0 %}
+      <div
+        class="
+          three-eighths
+          columns
+          medium-down--one-whole
+          offset-by-five
+          is-hidden-offset-mobile-only
+        "
+      >
+        <p class="quote mobile_no_border mg_bottom--zero padding_vertical--20">
+          {{ 'cart.general.continue_browsing_html' | t }}
+        </p>
+        <a
+          class="
+            cart__continue-shopping
+            global-button
+            {% comment %}global-button--text{% endcomment %}
+             global-button--primary mobile_primary_btn
+             mg_top--zero
+          "
+          href="{{ continue_url }}"
+        >
+          {{ 'cart.general.continue_shopping' | t }}
+        </a>
+      </div>
+    {% else %}
+      <script src="https://cdn.customily.com/shopify/static/customily.shopify.script.unified.js"></script>
+      <div class="notify--back_link columns mobile_notice is-hidden-none-mobile"><strong>Tip:</strong> Click item title to customize another one</div>
+      <form action="{{ routes.cart_url }}" method="post" id="cart_form" data-cart-form="cart-template" data-total-discount="{{ cart.total_discount }}" class="mg_bottom--24">
+        <div class="cart__wrapper is-flex is-flex-wrap">
+          <div class="two-thirds columns medium-down--one-whole large-down--one-whole cart--items__wrapper">
+            {%- assign total_saving = 0 -%}
+
+            {% for item in cart.items %}
+              {% assign itemTitle = item.product.title %}
+              {% assign hideQuantityBox = false %}
+              {% comment %} {% if itemTitle contains 'Additional Charge' %}{% assign hideQuantityBox = true %}{% endif %} {% endcomment %}
+              {% if item.variant.compare_at_price > item.variant.price %}
+                {%- assign saving = item.variant.compare_at_price | minus: item.variant.price | times: item.quantity -%}
+                {%- assign total_saving = saving | plus: total_saving -%}
+              {% endif %}
+              {% assign properties = item.properties %}
+              {% assign customilyPreviewImage = item.properties['_customily-preview'] %}
+              {% assign image = item.image %}
+              {% comment %} {% if customilyPreviewImage %}{% assign image = customilyPreviewImage %}{% endif%} {% endcomment %}
+              <div class="cart__item" data-cart-item data-line-id="{{ forloop.index }}" data-variant-id="{{ item.id }}">
+                <div class="one-third column medium-down--one-whole  cart__item--image">
+                  {% if customilyPreviewImage %}
+                    {%
+                      render 'image-element',
+                      image: image,
+                      alt: item.title,
+                      object_fit: settings.align_height,
+                      max_height: settings.collection_height,
+                      customilyPreviewImage: customilyPreviewImage,
+                      custom_class: "preview__image--cart"
+                    %}
+                    {% comment %} Review design add in - FDuy {% endcomment %}
+                    {%capture preview_design %}
+                    <div class="review_design--trigger" data-src="{{customilyPreviewImage}}">
+                        <span class="review_design--trigger--text">
+                          <svg class="review_design--trigger--icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.9999 10H11.9999V7.00003C11.9999 6.73481 11.8945 6.48046 11.707 6.29292C11.5195 6.10538 11.2651 6.00003 10.9999 6.00003C10.7347 6.00003 10.4803 6.10538 10.2928 6.29292C10.1053 6.48046 9.9999 6.73481 9.9999 7.00003V10H6.9999C6.73469 10 6.48033 10.1054 6.2928 10.2929C6.10526 10.4805 5.9999 10.7348 5.9999 11C5.9999 11.2652 6.10526 11.5196 6.2928 11.7071C6.48033 11.8947 6.73469 12 6.9999 12H9.9999V15C9.9999 15.2652 10.1053 15.5196 10.2928 15.7071C10.4803 15.8947 10.7347 16 10.9999 16C11.2651 16 11.5195 15.8947 11.707 15.7071C11.8945 15.5196 11.9999 15.2652 11.9999 15V12H14.9999C15.2651 12 15.5195 11.8947 15.707 11.7071C15.8945 11.5196 15.9999 11.2652 15.9999 11C15.9999 10.7348 15.8945 10.4805 15.707 10.2929C15.5195 10.1054 15.2651 10 14.9999 10ZM21.7099 20.29L17.9999 16.61C19.44 14.8144 20.1374 12.5353 19.9487 10.2413C19.76 7.94733 18.6996 5.81281 16.9854 4.27667C15.2713 2.74053 13.0337 1.91954 10.7328 1.9825C8.43194 2.04546 6.24263 2.98759 4.61505 4.61517C2.98747 6.24275 2.04534 8.43207 1.98237 10.7329C1.91941 13.0338 2.74041 15.2714 4.27655 16.9855C5.81269 18.6997 7.94721 19.7601 10.2412 19.9488C12.5352 20.1375 14.8143 19.4401 16.6099 18L20.2899 21.68C20.3829 21.7738 20.4935 21.8482 20.6153 21.8989C20.7372 21.9497 20.8679 21.9758 20.9999 21.9758C21.1319 21.9758 21.2626 21.9497 21.3845 21.8989C21.5063 21.8482 21.6169 21.7738 21.7099 21.68C21.8901 21.4936 21.9909 21.2444 21.9909 20.985C21.9909 20.7257 21.8901 20.4765 21.7099 20.29ZM10.9999 18C9.61544 18 8.26206 17.5895 7.11091 16.8203C5.95977 16.0511 5.06256 14.9579 4.53275 13.6788C4.00293 12.3997 3.86431 10.9923 4.13441 9.63439C4.4045 8.27653 5.07119 7.02925 6.05016 6.05028C7.02912 5.07131 8.27641 4.40463 9.63427 4.13453C10.9921 3.86443 12.3996 4.00306 13.6787 4.53287C14.9578 5.06268 16.051 5.95989 16.8202 7.11103C17.5894 8.26218 17.9999 9.61556 17.9999 11C17.9999 12.8565 17.2624 14.637 15.9497 15.9498C14.6369 17.2625 12.8564 18 10.9999 18Z" fill="black"/>
+                          </svg>Review design
+                        </span>
+                    </div>   
+                  {% endcapture %}
+                  {% unless hideQuantityBox %}
+                  <div class="is-hidden-desktop-only preview-design">
+                    {{ preview_design }}
+                  </div>
+                  {% endunless %}
+                  {% else %}
+                    <a href="{{ item.url }}" title="{{ item.title | escape }}" class="cart_page_image">
+                      {%
+                        render 'image-element',
+                        image: image,
+                        alt: item.title,
+                        object_fit: settings.align_height,
+                        max_height: settings.collection_height
+
+                      %}
+                    </a>
+                  {% endif %}
+    
+                </div>
+
+                <div class="two-thirds columns medium-down--one-whole cart_content_info cart__item--content">
+                  <h3 class="cart__item--title">
+
+                    <a href="{{ item.url }}">{{ item.product.title }}</a>
+                  </h3>
+                  {% comment %} This part in charges of showing product options {% endcomment %}
+                  {% unless item.product.has_only_default_variant or item.variant.title contains "Title" %}
+                    <ul class="meta">
+                      {% for option in item.product.options %}
+                        <li>
+                        <span class="label">{{ option }}: {{ item.variant.options[forloop.index0] }}</span>
+                        </li>
+                      {% endfor %}
+                      {% render 'cart-item-properties', item: item %}
+                    </ul>
+                  {% else %}
+                    <ul class="meta">{% render 'cart-item-properties', item: item %}</ul>
+                  {% endunless %}
+
+                  {% if item.selling_plan_allocation.selling_plan %}
+                    <p class="meta">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                  {% endif %}
+                  <div class="is-hidden-mobile-only is-flex cart__item--quantity__item__price">
+                   
+                    <div class="product-quantity-box left {% if hideQuantityBox %}no_border{% endif %}">
+                      {% unless hideQuantityBox %}
+                      <span class="ss-icon product-minus js-change-quantity" data-func="minus">
+                        {% render 'minus-button' %}
+                      </span>
+  
+                      <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-cart-quantity-input="cart-template" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %} />
+  
+                      <span class="ss-icon product-plus js-change-quantity" data-func="plus">
+                        {% render 'plus-button' %}
+                      </span>
+                      {% endunless %}
+                    </div>
+                 
+                    <p class="modal_price">
+                      {% if item.price > 0 %}
+                        <span class="money mobile_tab_menu {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}sale{% endif %}">
+                          {%
+                            render 'price-element',
+                            price: item.final_price
+                          %}
+                        </span>
+    
+                        {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}
+                          <span class="money was_price">
+                            {%
+                              render 'price-element',
+                              price: item.variant.compare_at_price,
+                              altPrice: item.original_price
+                            %}
+                          </span>
+                        {% endif %}
+                      {% else %}
+                        {{ settings.free_price_text }}
+                      {% endif %}
+                    </p>
+    
+                  </div>
+                <p class="modal_price is-hidden-desktop-only">
+                  {% if item.price > 0 %}
+                    <span class="money mobile_tab_menu {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}sale{% endif %}">
+                      {%
+                        render 'price-element',
+                        price: item.final_price
+                      %}
+                    </span>
+
+                    {% if item.price < item.variant.compare_at_price or item.line_level_discount_allocations.size > 0 %}
+                      <span class="money was_price">
+                        {%
+                          render 'price-element',
+                          price: item.variant.compare_at_price,
+                          altPrice: item.original_price
+                        %}
+                      </span>
+                    {% endif %}
+                  {% else %}
+                    {{ settings.free_price_text }}
+                  {% endif %}
+                </p>
+
+                {%
+                  render 'unit-price',
+                  item: item,
+                  variant: item.variant,
+                  product: item.product,
+                  class: 'cart__item-unit-price'
+                %}
+
+                {% if item.line_level_discount_allocations.size > 0 %}
+                  {% for discount_allocation in item.line_level_discount_allocations %}
+                    <p class="meta cart__item--discount">
+                      <span class="label">{{ 'cart.general.discount' | t }}:</span> {{ discount_allocation.discount_application.title }}
+                      {% comment %} (-
+                      <span class="money">
+                        {%
+                          render 'price-element',
+                          price: discount_allocation.amount
+                        %}
+                      </span>){% endcomment %}
+                    </p>
+                  {% endfor %}
+                {% endif %}
+                {% unless hideQuantityBox %}
+                  <div class="product-quantity-box left is-hidden-desktop-only">
+                    <span class="ss-icon product-minus js-change-quantity" data-func="minus">
+                      {% render 'minus-button', custom_class: 'size--16' %}
+                    </span>
+
+                    <input type="number" min="0" size="2" class="quantity" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" data-cart-quantity-input="cart-template" {% if settings.limit_quantity and item.variant.inventory_management != blank and item.variant.inventory_quantity > 0 and item.variant.inventory_policy == "deny" %}max="{{ item.variant.inventory_quantity }}"{% endif %} />
+
+                    <span class="ss-icon product-plus js-change-quantity" data-func="plus">
+                      {% render 'plus-button', custom_class: 'size--16' %}
+                    </span>
+                  </div>
+                {% endunless %}
+                <p class="price_total">
+                  <strong>{{ 'cart.general.total' | t }}:</strong>
+
+                  {% if item.line_level_discount_allocations.size > 0 %}
+                    <span class="money">
+                      {%
+                        render 'price-element',
+                        price: item.final_line_price
+                      %}
+                    </span>
+                  {% endif %}
+
+                  <span class="money {% if item.line_level_discount_allocations.size > 0 %}was_price{% endif %}">
+                    {%
+                      render 'price-element',
+                      price: item.original_line_price
+                    %}
+                  </span>
+                </p>
+
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&amp;quantity=0" class="cart__remove-btn" data-line-id="{{ forloop.index }}" data-remove-item="cart-template"><span class="remove-text">{{ 'cart.general.remove' | t }}</span> <span class="remove-icon"></span></a>
+                {% unless hideQuantityBox %}
+                <div class="is-hidden-mobile-only preview-design">
+                  {{ preview_design }}
+                </div>
+                {% endunless %}
+                </div>
+              </div>
+            {% endfor %}
+
+         
+        </div>
+
+        <div class="one-third column medium-down--one-whole large-down--one-whole text__align--center cart--checkout__wrapper">
+          {% render 'cart-sub-total-area', cart: cart, stick_checkout_mobile: section.settings.stick_checkout_button_mobile, continue_url: continue_url,total_saving: total_saving, display_savings: section.settings.display_savings %}
+        </div>
+      </div>
+    </form>
+    {% endif %}
+    {%comment%} start Recomatic code{% endcomment %}
+    {% unless cart.item_count == 0 %}
+    <div class="one-whole column recomatics_section desktop_secondary_button">
+      <h2 class="title mobile_title mg_bottom--20 text-align-center">{{ shop.metafields.recomatic.cart.headline }}</h2>
+      <div id="recomatic-related-products" data-widget="cart" data-product-ids="[{{ cart.items | map: 'product' | map: 'id' | join: ', ' }}]"></div>
+    </div>
+    {%comment%} end Recomatic code{% endcomment %}
+    {% endunless %}
+  </div>
+
+</section>
+
+{% render 'cart-shipping-calculator' %}
+
+{% schema %}
+{
+  "name": "Cart page",
+  "class": "shopify-section--cart-template",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_special_instructions",
+      "label": "Show \"note\" text box"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_savings",
+      "label": "Show total savings",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_additional_buttons",
+      "label": "Show additional checkout buttons",
+      "info":"Additional buttons are buttons such as Paypal, Payoneer - FDuy",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "stick_checkout_button_mobile",
+      "label": "Stick checkout button on bottom for mobile devices",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "cart_message",
+      "label": "Cart message"
+    },
+    {
+      "type": "url",
+      "id": "continue_shopping_url",
+      "label": "Continue shopping link",
+      "info": "Where to direct customers after clicking \"Continue shopping\""
+    }
+  ]
+}
+
+{% endschema %}

@@ -1,0 +1,19 @@
+{% comment %}
+Required values
+price: <product price>
+{% endcomment %}
+
+{% if settings.currency_format == 'money_with_currency_format' %}
+  {% if price %}
+  {{ price | money }}
+  {% elsif altPrice %}
+  {{ altPrice | money }}
+{% endif %}
+{% else %}
+  {% comment %} {{ price | money }} {% endcomment %}
+  {% if price %}
+    {{ price | money }}
+    {% elsif altPrice %}
+    {{ altPrice | money }}
+  {% endif %}
+{% endif %}

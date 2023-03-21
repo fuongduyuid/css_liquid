@@ -1,0 +1,58 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-order-tracking",
+      "blocks": {
+        "55c1b6c5-edf4-442e-9c69-c224635b85bc": {
+          "type": "collapsible-tab",
+          "settings": {
+            "collapsible_tab_heading": "When will I receive my order?",
+            "collapsible_tab_text": "<p>Use this text to share information about your product.<\/p>",
+            "collapsible_tab_content": "when_to_receive",
+            "collapsible_tab_open": false,
+            "collapsible_tab_css_class": ""
+          }
+        },
+        "bf06cf87-be4d-4b39-afe0-220f74d26def": {
+          "type": "collapsible-tab",
+          "settings": {
+            "collapsible_tab_heading": "My tracking number doesn’t work",
+            "collapsible_tab_text": "<p>Use this text to share information about your product.<\/p>",
+            "collapsible_tab_content": "tracking_not_work",
+            "collapsible_tab_open": false,
+            "collapsible_tab_css_class": ""
+          }
+        },
+        "80fe9a4b-8d0e-4a04-943e-6f16196baeed": {
+          "type": "collapsible-tab",
+          "settings": {
+            "collapsible_tab_heading": "Why is my order tracking not moving?",
+            "collapsible_tab_text": "<p>Use this text to share information about your product.<\/p>",
+            "collapsible_tab_content": "tracking_not_moving",
+            "collapsible_tab_open": false,
+            "collapsible_tab_css_class": ""
+          }
+        }
+      },
+      "block_order": [
+        "55c1b6c5-edf4-442e-9c69-c224635b85bc",
+        "bf06cf87-be4d-4b39-afe0-220f74d26def",
+        "80fe9a4b-8d0e-4a04-943e-6f16196baeed"
+      ],
+      "settings": {
+        "page_title": "Order Tracking",
+        "use_popup": false,
+        "poup_title": "I don’t know my order number",
+        "check_email_svg_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0563\/9988\/8539\/files\/Check_Email_-_Popup_Illustration.svg?v=1668584544",
+        "check_email_heading": "Check email subject",
+        "check_email_content": "Your order number and tracking number can be found in the confirmation emails.",
+        "check_spam_svg_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0563\/9988\/8539\/files\/Check_Spam_-_Popup_Illustration.svg?v=1668584544",
+        "check_spam_heading": "Check spam box",
+        "check_spam_content": "If you haven’t found them yet, try searching out your promotion\/spam folder."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

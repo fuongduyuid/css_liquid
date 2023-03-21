@@ -1,0 +1,185 @@
+{% comment %}
+  Snippet can be used in section or block
+  eg. {% include 'include-contact-form' %}
+{% endcomment %}
+
+{% comment %}Assign object as block or section{% endcomment %}
+{% if type == 'block' %}
+  {% assign object = block %}
+{% else %}
+  {% assign object = section %}
+{% endif %}
+
+{% assign id = object.id %}
+
+{% assign contact_heading = object.settings.contact_heading %}
+{% assign contact_subheading = object.settings.contact_subheading %}
+{% assign contact_content = object.settings.contact_content %}
+{% assign contact_text_position = object.settings.contact_text_position %}
+{% assign contact_text_alignment = object.settings.contact_text_alignment %}
+
+{% if context == 'contact-template' %}
+  {% assign contact_content = page.content %}
+  {% assign bottom_form_content = object.settings.contact_text %}
+  {% assign contact_text_position = 'center' %}
+  {% assign contact_text_alignment = 'left' %}
+{% endif %}
+
+<section class="section contact_template--content">
+  {% unless context == 'contact-template' %}
+    {% if contact_heading != blank %}
+      <div class="contact-form__heading">
+        <h2 class="title center">
+          {{ contact_heading }}
+        </h2>
+        <div class="feature_divider"></div>
+      </div>
+    {% endif %}
+  {% endunless %}
+
+  {% comment %} Coppied from macorner {% endcomment %}
+  <p class='contact_form--custom'>If you have questions about our products or your orders, please create a support ticket by submitting the form below.&nbsp;</p>
+  <p class='contact_form--custom'>Please note that it may take some time to respond to your inquiry depending on the contents of your message. We will respond to you within&nbsp;<b data-stringify-type="bold">24 business hours.</b></p>
+  <div class="container contact-form contact-form-container contact-form__position--{{ contact_text_position }}">
+
+    <div class="five-eighths columns medium-down--one-whole">
+      <form action="https://pawfecthouse.com/pages/thank-you" name='zendesk_contact_form' class="zendesk_contact_form"  enctype="multipart/form-data">
+        {% if form.posted_successfully? %}
+          <div class="contact__form-success">
+            <p class="quote">
+              {{ 'contact.form.post_success' | t }}
+            </p>
+          </div>
+        {% endif %}
+
+        {% if form.errors %}
+          <div class="contact__form-errors">
+            <p class="quote">{{ 'general.forms.post_error' | t }}</p>
+
+            {%- assign message = 'contact.form.message' | t -%}
+
+            <ul class="center">
+              {% for field in form.errors %}
+                {% if field == 'form' %}
+                  <li>{{ form.errors.messages[field] }}</li>
+                {% else %}
+                  <li>
+                    {%- assign field_name = field | replace: 'body', message -%}
+                    {{ 'general.forms.post_field_error' | t: field: field_name, error: form.errors.messages[field] }}
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <div class="contact__form-name">
+          {%- assign name_attr = 'contact.form.name' | handle -%}
+          <label for="contactFormName">
+            {{ 'contact.form.name' | t }} <span class="red">*</span>
+          </label>
+          <input type="text"
+                id="contactFormName"
+                name="contact[{{ name_attr }}]"
+                placeholder="{{ 'contact.form.name' | t }}"
+                autocapitalize="words"
+                value="{% if form[name_attr] %}{{ form[name_attr] }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                required="required">
+        </div>
+
+        <div class="contact__form-email">
+          <label for="contactFormEmail">
+            {{ 'contact.form.email' | t }} <span class="red">*</span>
+          </label>
+          <input type="email"
+                id="contactFormEmail"
+                name="contact[email]"
+                placeholder="{{ 'contact.form.email' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}" required="required">
+        </div>
+        {% comment %} FDUY - Request type {% endcomment %}
+        <div class="contact__form-request_type">
+          <label for="contactFormRequestType">
+            {{ 'contact.form.request_type' | t }} <span class="red">*</span>
+          </label>
+          <select id="contactFormRequestType" name="contact[request_type]" value="{% if form.request_type %}{{ form.request_type }}{% endif %}" required="required">
+            <option value="Order Status">Order Status</option>
+            <option value="Modify/Cancel My Order">Modify/Cancel My Order</option>
+            <option value="Damage/Defective Product">Damage/Defective Product</option>
+            <option value="Payment & Order Placing">Payment & Order Placing</option>
+            <option value="Other">Other</option>
+          </select>
+        
+        </div>
+        {% comment %} FDUY - Order Id {% endcomment %}
+        <div class="contact__form-order_number">
+          <label for="contactFormOrderNumber">
+            {{ 'contact.form.order_number' | t }}
+          </label>
+          <input type="text"
+                id="contactFormOrderNumber"
+                name="contact[order_number]"
+                placeholder="{{ 'contact.form.order_number_placeholder' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.order_number %}{{ form.order_number }}{% endif %}">
+        </div>
+        {% comment %} FDUY - attachment {% endcomment %}
+        <div class="contact__form-attachment">
+          <label for="contactFormAttachment">
+            {{ 'contact.form.attachment' | t }} <span class="hide red attachment_red">*</span>
+          </label>
+          <input type="file"
+                id="contactFormAttachment"
+                name="contact[attachment]"
+                placeholder="{{ 'contact.form.attachment' | t }}"
+                autocorrect="off"
+                autocapitalize="off"
+                value="{% if form.attachment %}{{ form.attachment }}{% endif %}">
+        </div>
+          <div class="contact__form-message">
+            <label for="contactFormMessage">
+            {{ 'contact.form.message' | t }} <span class="red">*</span>
+            </label>
+            <textarea rows="5"
+                    id="contactFormMessage"
+                    name="contact[body]"
+                    placeholder="{{ 'contact.form.message' | t }}"
+                    required="required">
+              {% if form.body %}
+                {{ form.body }}
+              {% endif %}
+            </textarea>
+
+            <div class="contact-form__bottom-content">
+              {{ bottom_form_content }}
+            </div>
+            <div class="submission_area">
+              <div class="hide loader"></div>
+              <input type="submit" class="global-button global-button--primary contact_form-submit_btn desktop_sub_title mobile_primary_btn" value="{{ 'contact.form.send' | t }}" />
+            </div>
+          </div>
+      </form>    
+    </div>
+
+    <div class="five-eighths columns medium-down--one-whole">
+      <div class="{% if contact_text_alignment == "center" %}center{% elsif contact_text_alignment == "right" %}align_right{% endif %}">
+        {% unless context == 'contact-template' %}
+          {% if contact_subheading != blank %}
+            <div class="contact-form__subheading">
+              <h3>{{ contact_subheading }}</h3>
+            </div>
+          {% endif %}
+        {% endunless %}
+
+        {% if contact_content != blank %}
+          <div class="contact-form__content rte">
+            {{ contact_content }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

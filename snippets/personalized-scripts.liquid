@@ -1,0 +1,29 @@
+{% if template contains 'product' %}
+  {% assign isPersonalized = false %}
+  {% assign vendor = product.vendor | downcase %}
+  {% if vendor == 'personalbridge' %}
+    <script>window.money_format = "{{ shop.money_format }}";window.pbstoreid="[[.STORE_ID]]";</script>
+    <style>
+      form[action='/cart/add'] [data-shopify='payment-button'],
+      form[action='/cart/add'] .shopify-payment-button{
+        display: none !important;
+      }
+    </style>
+	<link
+      rel="stylesheet"
+      type="text/css"
+      href="https://apis.personalbridge.com/style.css"
+      as="style"
+    />
+	<link
+      rel="preload"
+      href="https://apis.personalbridge.com/{{ shop.permanent_domain }}/{{ product.id }}"
+      as="script"
+    />
+	<script
+      type="text/javascript"
+      src="https://apis.personalbridge.com/{{ shop.permanent_domain }}/{{ product.id }}"
+    ></script>
+  {% endif %}
+{% endif %}
+<style>.product-details__item--property{display:none}</style>

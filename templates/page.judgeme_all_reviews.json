@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {}
+    },
+    "judgeme": {
+      "type": "judgeme-all-reviews",
+      "settings": {}
+    },
+    "16652374044d4a6a2f": {
+      "type": "apps",
+      "blocks": {
+        "06693fa5-1543-4a6f-bc05-daaa083f9441": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WuvAKS"
+          }
+        }
+      },
+      "block_order": [
+        "06693fa5-1543-4a6f-bc05-daaa083f9441"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "main",
+    "judgeme",
+    "16652374044d4a6a2f"
+  ]
+}

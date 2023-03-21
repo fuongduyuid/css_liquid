@@ -1,0 +1,542 @@
+{
+  "sections": {
+    "slideshow-1": {
+      "type": "slideshow",
+      "blocks": {
+        "64080da4-bb4c-4328-ade1-781ee47a4d23": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/BANNER-MTD-2023-V2.jpg",
+            "pretext": "",
+            "title": "",
+            "subtitle": "",
+            "button1": "",
+            "button1_link": "shopify:\/\/collections\/mothers-day",
+            "button1_style": "global-button--banner",
+            "button2": "",
+            "button2_link": "",
+            "button2_style": "global-button--banner",
+            "text_position": "center",
+            "text_align": "center",
+            "caption_content_background": "original",
+            "mobile_image": "shopify:\/\/shop_images\/BANNER-MTD-2023-V2.jpg",
+            "mobile_image_crop": "none"
+          }
+        },
+        "d2957c70-8de9-4502-b871-0832da46db64": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/BANNER-Patrick-2023-V2.jpg",
+            "pretext": "",
+            "title": "",
+            "subtitle": "",
+            "button1": "",
+            "button1_link": "shopify:\/\/collections\/st-patricks-day",
+            "button1_style": "global-button--banner",
+            "button2": "",
+            "button2_link": "",
+            "button2_style": "global-button--banner",
+            "text_position": "center",
+            "text_align": "center",
+            "caption_content_background": "original",
+            "mobile_image": "shopify:\/\/shop_images\/BANNER-Patrick-2023-V2.jpg",
+            "mobile_image_crop": "none"
+          }
+        },
+        "6c6b3070-ea1b-4e13-b821-e137b2baaf72": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/MAIN-BANNER-FINAL-SIZE-1708x800-BLUE.jpg",
+            "pretext": "",
+            "title": "",
+            "subtitle": "",
+            "button1": "",
+            "button1_link": "shopify:\/\/collections\/gifts-for-pet-lovers",
+            "button1_style": "global-button--banner",
+            "button2": "",
+            "button2_link": "",
+            "button2_style": "global-button--banner",
+            "text_position": "center",
+            "text_align": "center",
+            "caption_content_background": "original",
+            "mobile_image": "shopify:\/\/shop_images\/MAIN-BANNER-FINAL-SIZE-1708x800-BLUE.jpg",
+            "mobile_image_crop": "none"
+          }
+        }
+      },
+      "block_order": [
+        "64080da4-bb4c-4328-ade1-781ee47a4d23",
+        "d2957c70-8de9-4502-b871-0832da46db64",
+        "6c6b3070-ea1b-4e13-b821-e137b2baaf72"
+      ],
+      "settings": {
+        "slide_show_grid": true,
+        "grid_slide_num": 3,
+        "wide_display": false,
+        "slideshow_text_animation": "fadeInDown",
+        "slideshow_animation": "slide",
+        "slideshow_speed": 6,
+        "activate_adaptiveHeight": false,
+        "mobile_text_below_image": true,
+        "mobile_text_color": "",
+        "css_class": "homepage--slideshow",
+        "custom_css": ""
+      }
+    },
+    "1660397181e58c7d54": {
+      "type": "gallery",
+      "blocks": {
+        "1660397181c9851d73-7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/WEB-1.STORY-BANNER-SUGGEST-2561X629.jpg",
+            "image_mobile": "shopify:\/\/shop_images\/MOB-1_1.png",
+            "destination": "shopify:\/\/pages\/happy-customers"
+          }
+        }
+      },
+      "block_order": [
+        "1660397181c9851d73-7"
+      ],
+      "settings": {
+        "wide_display": false,
+        "title": "",
+        "gallery_type": "classic",
+        "grid-size": 1,
+        "enable_lightbox": false,
+        "css_class": "single__image--gallery small-down--one-whole",
+        "custom_css": ""
+      }
+    },
+    "094b0015-b73b-4914-96d8-aa8542ed7db7": {
+      "type": "collection-list",
+      "disabled": true,
+      "blocks": {
+        "template--16597483323624__094b0015-b73b-4914-96d8-aa8542ed7db7-166867171241aa52db-0": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "ornaments-for-family",
+            "image": "shopify:\/\/shop_images\/Family_Ornament_7fa71dd8-75fe-4094-a888-b1517bdc1e17.png",
+            "feature_collection_display_name": "Family<br>Ornament",
+            "feature_collection_display_name--desktop": "Family Ornament"
+          }
+        },
+        "template--16597483323624__094b0015-b73b-4914-96d8-aa8542ed7db7-166867171241aa52db-1": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "ornaments-for-pet-lovers",
+            "image": "shopify:\/\/shop_images\/Pets_Ornament_c7792b39-23ef-4b30-9a89-cb1b9da49c91.png",
+            "feature_collection_display_name": "Pet Lovers<br>Ornament",
+            "feature_collection_display_name--desktop": "Pets Ornament"
+          }
+        },
+        "template--16597483323624__094b0015-b73b-4914-96d8-aa8542ed7db7-166867171241aa52db-2": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "best-friend-ornament",
+            "image": "shopify:\/\/shop_images\/Besties_Ornament_6d52974c-a4e7-48d7-b834-e330410f4052.png",
+            "feature_collection_display_name": "Besties<br>Ornament",
+            "feature_collection_display_name--desktop": "Besties Ornament"
+          }
+        },
+        "6e672f4d-4d42-4b8c-962a-bd460ffcb52a": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "blanket",
+            "image": "shopify:\/\/shop_images\/Blanket.png",
+            "feature_collection_display_name": "Blanket",
+            "feature_collection_display_name--desktop": "Blanket"
+          }
+        },
+        "98ef1554-2606-4c99-b32c-1db1ff37a0f6": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "apparel-couple",
+            "image": "shopify:\/\/shop_images\/Couple_Apparel_85af7ef3-7760-4794-83d7-2eee2c84ab62.png",
+            "feature_collection_display_name": "Couple<br>Apparel",
+            "feature_collection_display_name--desktop": "Couple Apparel"
+          }
+        },
+        "022f1eb0-27b1-42a6-816e-27cde15fda11": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "gifts-for-pet-lovers",
+            "image": "shopify:\/\/shop_images\/Pet_Lover_Decoration_798906e6-2f69-4af8-8ee3-a6f5bafd491d.png",
+            "feature_collection_display_name": "Pet Lovers<br>Decoration",
+            "feature_collection_display_name--desktop": "Pet Lovers Decoration"
+          }
+        }
+      },
+      "block_order": [
+        "template--16597483323624__094b0015-b73b-4914-96d8-aa8542ed7db7-166867171241aa52db-0",
+        "template--16597483323624__094b0015-b73b-4914-96d8-aa8542ed7db7-166867171241aa52db-1",
+        "template--16597483323624__094b0015-b73b-4914-96d8-aa8542ed7db7-166867171241aa52db-2",
+        "6e672f4d-4d42-4b8c-962a-bd460ffcb52a",
+        "98ef1554-2606-4c99-b32c-1db1ff37a0f6",
+        "022f1eb0-27b1-42a6-816e-27cde15fda11"
+      ],
+      "settings": {
+        "title": "Our Top Christmas Collections",
+        "align_height": false,
+        "collection_height": 150,
+        "frontpage_collections_per_row": 6,
+        "text_position": false,
+        "css_class": "shop_by_collection--third",
+        "custom_css": ""
+      }
+    },
+    "collection-list-1": {
+      "type": "collection-list",
+      "blocks": {
+        "block-2": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "gift-for-dog-lovers",
+            "image": "shopify:\/\/shop_images\/ShopByRecipients_DogLovers.png",
+            "feature_collection_display_name": "DOG LOVERS",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "block-1": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "gift-for-cat-lovers",
+            "image": "shopify:\/\/shop_images\/ShopByRecipients_CatLovers.png",
+            "feature_collection_display_name": "CAT LOVERS",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "9927bb45-4139-4d1a-8310-49a99ae17367": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "gift-for-couple",
+            "image": "shopify:\/\/shop_images\/ShopByRecipients_Couples.png",
+            "feature_collection_display_name": "COUPLES",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "block-4": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "gift-for-bestie",
+            "image": "shopify:\/\/shop_images\/ShopByRecipients_Friends.png",
+            "feature_collection_display_name": "FRIENDS",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "block-3": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "family",
+            "image": "shopify:\/\/shop_images\/ShopByRecipients_Family.png",
+            "feature_collection_display_name": "FAMILY",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "12c7a8dc-606c-45ee-9000-ddcb39a06ef3": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "memorial-gifts",
+            "image": "shopify:\/\/shop_images\/ShopByRecipients_MemorialGifts.png",
+            "feature_collection_display_name": "MEMORIAL GIFTS",
+            "feature_collection_display_name--desktop": ""
+          }
+        }
+      },
+      "block_order": [
+        "block-2",
+        "block-1",
+        "9927bb45-4139-4d1a-8310-49a99ae17367",
+        "block-4",
+        "block-3",
+        "12c7a8dc-606c-45ee-9000-ddcb39a06ef3"
+      ],
+      "settings": {
+        "title": "Shop by Recipients",
+        "align_height": false,
+        "collection_height": 200,
+        "frontpage_collections_per_row": 6,
+        "text_position": true,
+        "meta_data_image": "shopify:\/\/shop_images\/PatternProductByRecipients.png",
+        "css_class": "gifts_by_recipients",
+        "custom_css": ""
+      }
+    },
+    "1658116075aa8c10a3": {
+      "type": "collection-list",
+      "blocks": {
+        "5bd39f57-87af-40e3-8b3b-85d713844ea6": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "t-shirt",
+            "image": "shopify:\/\/shop_images\/T-SHIRTS_6644c0c5-1fc2-4a4f-8903-53c66ee9a3de.png",
+            "feature_collection_display_name": "Apparel ",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "1658116075b2080af5-2": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "blanket",
+            "image": "shopify:\/\/shop_images\/Blanket_a4148d48-fa2a-4b33-bcae-c79dc685365a.png",
+            "feature_collection_display_name": "Blanket",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "0c885deb-6b4c-4893-8679-5b0c91d9666d": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "poster",
+            "image": "shopify:\/\/shop_images\/Poster.png",
+            "feature_collection_display_name": "Poster",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "70a0691e-1720-4605-be54-fe946cc549e2": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "key-holder",
+            "image": "shopify:\/\/shop_images\/KEY-HOLDER.png",
+            "feature_collection_display_name": "",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "1658116075b2080af5-0": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "doormat",
+            "image": "shopify:\/\/shop_images\/Decorative_Mat_8eca039f-9908-421e-a7a4-a87495bc76f5.png",
+            "feature_collection_display_name": "Decorative Mat",
+            "feature_collection_display_name--desktop": ""
+          }
+        },
+        "1658116075b2080af5-1": {
+          "type": "collection",
+          "settings": {
+            "feature_collection": "beach-towel",
+            "image": "shopify:\/\/shop_images\/Beach_Towel_d64b0678-9ad3-484d-93d3-4a0e340058bb.png",
+            "feature_collection_display_name": "Beach Towel",
+            "feature_collection_display_name--desktop": ""
+          }
+        }
+      },
+      "block_order": [
+        "5bd39f57-87af-40e3-8b3b-85d713844ea6",
+        "1658116075b2080af5-2",
+        "0c885deb-6b4c-4893-8679-5b0c91d9666d",
+        "70a0691e-1720-4605-be54-fe946cc549e2",
+        "1658116075b2080af5-0",
+        "1658116075b2080af5-1"
+      ],
+      "settings": {
+        "title": "Shop by Products",
+        "align_height": false,
+        "collection_height": 150,
+        "frontpage_collections_per_row": 6,
+        "text_position": false,
+        "css_class": "shop_by_products",
+        "custom_css": ""
+      }
+    },
+    "1660788667e587b2b0": {
+      "type": "personalized-tutorial",
+      "blocks": {
+        "d418505e-32f2-4621-9dc9-0dbedfc43754": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tutorial-Step1_1583b822-bd11-4be2-9e04-248b45ab604e.png",
+            "title": "Pick what you like",
+            "sub_title": "Step 1",
+            "desc": "Simply click on the item you’re interested"
+          }
+        },
+        "440fde57-f48f-437a-8ef3-91176ed2eb05": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tutorial-Step2_4fa6d16f-c7d2-41a5-880c-0a8dd6f7939c.png",
+            "title": "Rock your own style",
+            "sub_title": "Step 2",
+            "desc": "Choose the personalied style and optional details"
+          }
+        },
+        "7a90efc2-2a64-48b0-bad4-56f53de6476e": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tutorial-Step3_af08da0b-6f10-4aac-a5b5-b82e56a69310.png",
+            "title": "Let’s have a look",
+            "sub_title": "Step 3",
+            "desc": "Almost done, check your final preview & edit if any changes are needed"
+          }
+        },
+        "950e702d-951a-49f3-843c-859d1bf186bc": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Tutorial-Step4_2a471840-1be5-4aa7-a454-78dd4f54800f.png",
+            "title": "Place your order",
+            "sub_title": "Step 4",
+            "desc": "Click add to cart, check out and wait for us!"
+          }
+        }
+      },
+      "block_order": [
+        "d418505e-32f2-4621-9dc9-0dbedfc43754",
+        "440fde57-f48f-437a-8ef3-91176ed2eb05",
+        "7a90efc2-2a64-48b0-bad4-56f53de6476e",
+        "950e702d-951a-49f3-843c-859d1bf186bc"
+      ],
+      "settings": {
+        "wide_display": true,
+        "heading_title": "Easy as pie - 4 steps to customize",
+        "sub_heading_title": "",
+        "link_video": "https:\/\/www.youtube.com\/watch?v=c3DplJffQ0k"
+      }
+    },
+    "cc88031a-fd42-4030-8856-c3c12e3afa77": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Trending Now",
+        "collection_description": true,
+        "collection": "trending-manually",
+        "target_leading_collection": "https:\/\/pawfecthouse.com\/collections\/trending",
+        "collection_style": "grid",
+        "show_origin_price": false,
+        "collection_with_banner": false,
+        "banner_position": "left",
+        "products_per_row--mobile": 2,
+        "products_limit--mobile": 8,
+        "products_per_row--desktop": 5,
+        "products_limit--desktop": 10,
+        "more_btn": true,
+        "css_class": "",
+        "custom_css": ""
+      }
+    },
+    "166064902194cdbd12": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "New arrivals",
+        "collection_description": false,
+        "collection": "new-arrivals",
+        "target_leading_collection": "https:\/\/pawfecthouse.com\/collections\/new-arrivals",
+        "collection_style": "grid",
+        "show_origin_price": false,
+        "collection_with_banner": false,
+        "banner_image": "shopify:\/\/shop_images\/Featired_CelebrateLove.png",
+        "banner_position": "right",
+        "products_per_row--mobile": 4,
+        "products_limit--mobile": 8,
+        "products_per_row--desktop": 5,
+        "products_limit--desktop": 10,
+        "more_btn": true,
+        "css_class": "featured_collection--none_banner",
+        "custom_css": ""
+      }
+    },
+    "166073721316e59992": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "",
+        "collection_description": false,
+        "collection": "gift-for-couple",
+        "target_leading_collection": "",
+        "collection_style": "grid",
+        "show_origin_price": false,
+        "collection_with_banner": true,
+        "banner_image": "shopify:\/\/shop_images\/WEB-XMAS-Collection_Banner-1000x1388.jpg",
+        "banner_image_moblie": "shopify:\/\/shop_images\/WEB-XMAS-Main_Banner_1.jpg",
+        "banner_position": "left",
+        "products_per_row--mobile": 2,
+        "products_limit--mobile": 4,
+        "products_per_row--desktop": 3,
+        "products_limit--desktop": 6,
+        "more_btn": true,
+        "css_class": "featured_collection--with__banner",
+        "custom_css": ""
+      }
+    },
+    "1660811666af0ca704": {
+      "type": "gallery",
+      "disabled": true,
+      "blocks": {
+        "1660811665cedb8868-7": {
+          "type": "image",
+          "disabled": true,
+          "settings": {
+            "image": "shopify:\/\/shop_images\/Image_2.png",
+            "destination": ""
+          }
+        }
+      },
+      "block_order": [
+        "1660811665cedb8868-7"
+      ],
+      "settings": {
+        "wide_display": false,
+        "title": "",
+        "gallery_type": "classic",
+        "grid-size": 4,
+        "enable_lightbox": false,
+        "css_class": "single__image--gallery margin_bottom-60px",
+        "custom_css": ""
+      }
+    },
+    "1660737272693b674d": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "",
+        "collection_description": false,
+        "collection": "upload-image-collection",
+        "target_leading_collection": "",
+        "collection_style": "grid",
+        "show_origin_price": false,
+        "collection_with_banner": true,
+        "banner_image": "shopify:\/\/shop_images\/XMAS-Banner-Custom-Photo-WEB_4.jpg",
+        "banner_image_moblie": "shopify:\/\/shop_images\/XMAS-Banner---Custom-Photo-MOB-1708x800.jpg",
+        "banner_position": "right",
+        "products_per_row--mobile": 2,
+        "products_limit--mobile": 4,
+        "products_per_row--desktop": 3,
+        "products_limit--desktop": 6,
+        "more_btn": true,
+        "css_class": "featured_collection--with__banner",
+        "custom_css": ""
+      }
+    },
+    "16581272657fe692f3": {
+      "type": "apps",
+      "blocks": {
+        "075762e4-5035-4a3e-8cb3-bfd881d7426e": {
+          "type": "shopify:\/\/apps\/judge-me-product-reviews\/blocks\/featured_carousel\/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "maxwidth": 1280
+          }
+        },
+        "5ef3e193-a5d5-42ed-b8b1-c5f08e44a482": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WuvAKS"
+          }
+        }
+      },
+      "block_order": [
+        "075762e4-5035-4a3e-8cb3-bfd881d7426e",
+        "5ef3e193-a5d5-42ed-b8b1-c5f08e44a482"
+      ],
+      "settings": {}
+    }
+  },
+  "order": [
+    "slideshow-1",
+    "1660397181e58c7d54",
+    "094b0015-b73b-4914-96d8-aa8542ed7db7",
+    "collection-list-1",
+    "1658116075aa8c10a3",
+    "1660788667e587b2b0",
+    "cc88031a-fd42-4030-8856-c3c12e3afa77",
+    "166064902194cdbd12",
+    "166073721316e59992",
+    "1660811666af0ca704",
+    "1660737272693b674d",
+    "16581272657fe692f3"
+  ]
+}

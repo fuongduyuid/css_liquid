@@ -1,0 +1,117 @@
+{
+  "sections": {
+    "main": {
+      "type": "collection-template",
+      "blocks": {
+        "b1f094e8-554f-44cc-8c3f-eb89e391a954": {
+          "type": "faceted_filtering",
+          "disabled": true,
+          "settings": {
+            "show_filter_product_count": true
+          }
+        },
+        "b04db915-c215-435c-a97f-1a142269eb6d": {
+          "type": "filter",
+          "disabled": true,
+          "settings": {
+            "filter_name": "INTERESTS",
+            "filter_tags": "yoga,reading,witch",
+            "enable_filter_swatches": true
+          }
+        }
+      },
+      "block_order": [
+        "b1f094e8-554f-44cc-8c3f-eb89e391a954",
+        "b04db915-c215-435c-a97f-1a142269eb6d"
+      ],
+      "settings": {
+        "featured_collection_image": false,
+        "hide_products": true,
+        "wide_display": false,
+        "show_origin_price": false,
+        "image": "shopify:\/\/shop_images\/BrandStory.png",
+        "mobile_image": "shopify:\/\/shop_images\/MOB-1_1.png",
+        "mobile_image_crop": "none",
+        "caption_content_background": "original",
+        "display_collection_title": false,
+        "display_collection_title_separately": true,
+        "collection_breadcrumb": false,
+        "collection_tags": false,
+        "collection_sort": false,
+        "custom_sort": false,
+        "products_per_row": 4,
+        "pagination_limit": 48,
+        "sidebar_drawer": true,
+        "toggle": false
+      }
+    },
+    "1661853224ab32fdfd": {
+      "type": "gallery",
+      "disabled": true,
+      "blocks": {
+        "16618532249111a024-7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify:\/\/shop_images\/BrandStory_375_ee11e7a4-b563-459b-93ee-722e7683fe72.png",
+            "destination": ""
+          }
+        }
+      },
+      "block_order": [
+        "16618532249111a024-7"
+      ],
+      "settings": {
+        "wide_display": false,
+        "title": "",
+        "gallery_type": "masonry",
+        "grid-size": 1,
+        "enable_lightbox": false,
+        "css_class": "single__image--gallery small-down--one-whole",
+        "custom_css": ""
+      }
+    },
+    "1661767977cd2dac78": {
+      "type": "apps",
+      "blocks": {
+        "e6cb22c8-eeae-4765-8249-c3c62de5250b": {
+          "type": "shopify:\/\/apps\/smart-search-filter\/blocks\/app-block\/d8f24ada-02b1-458a-bbeb-5bf16d5c921e",
+          "settings": {}
+        },
+        "7f0ceb38-14b2-458c-86e4-589c253aeac7": {
+          "type": "shopify:\/\/apps\/klaviyo-email-marketing-sms\/blocks\/form-embed-block\/2632fe16-c075-4321-a88b-50b567f42507",
+          "settings": {
+            "formId": "WuvAKS"
+          }
+        }
+      },
+      "block_order": [
+        "e6cb22c8-eeae-4765-8249-c3c62de5250b",
+        "7f0ceb38-14b2-458c-86e4-589c253aeac7"
+      ],
+      "settings": {}
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Sign up & enjoy 10% OFF",
+        "newsletter_text": "<p>Give us a chance to personalize your stories<\/p>",
+        "newsletter_section_text_align": "center",
+        "banner_image_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0563\/9988\/8539\/files\/NewLetterBackground.svg?v=1660882133",
+        "image": "shopify:\/\/shop_images\/NewLetterBackground_x4_6bcfb244-3a15-4efd-a77e-c810634e5de7.png",
+        "mobile_image": "shopify:\/\/shop_images\/NewLetterBackground_x4_6bcfb244-3a15-4efd-a77e-c810634e5de7.png",
+        "css_class": "newsletter_section_with_background",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "1661853224ab32fdfd",
+    "1661767977cd2dac78",
+    "newsletter"
+  ]
+}

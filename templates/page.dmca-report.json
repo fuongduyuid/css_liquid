@@ -1,0 +1,148 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-template",
+      "disabled": true,
+      "settings": {}
+    },
+    "166426495417b4ff43": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<h1 class=\"text-align-center\">DMCA Report<\/h1>\n<h5>Collecting Personal Information<\/h5><p>If you believe that PawfectHouse™ has infringed your intellectual property rights, we encourage you to contact us using the procedure outlined below.<\/p>\n<div class=\"dmca-inner-content\">\n<h6>A. PROCEDURE FOR REPORTING INTELLECTUAL PROPERTY INFRINGEMENT:<\/h6><p>It is our policy to (1) block access to or remove any content (including, without limitation, text, graphics, and photos) (collectively, \"Content\") that it believes in good faith to infringe the intellectual property rights of third parties following receipt of a compliant notice; and (2) remove and discontinue service to repeat infringers.<\/p><p>If you believe that Content residing on or accessible through the website constitutes copyright infringement, or that your intellectual property rights have been otherwise violated, please send a notice of infringement containing the following information to the Designated Agent listed below:<\/p><ol><li>Identification of the copyrighted work or other intellectual property that you claim has been infringed on or through the website, including the registration number(s) for any such material if applicable;<\/li><li>Identification of the Content that you claim has infringed on the identified copyrighted work or other intellectual property, including (a) a description of how the material in question is using the copyrighted work or other intellectual property in a way that constitutes infringement, and (b) a description of where the material in question is located on or in the website, with sufficient detail that we may verify the existence of the material within the website;<\/li><li>Your contact information, including your full name, mailing address, telephone number, and email address;<\/li><li>A statement by you that you have a good faith belief that the disputed use of the copyrighted work or other intellectual property is not authorized by the copyright holder, its agents, or the law;<\/li><li>A statement by you, made under penalty of perjury, that the information provided in your notice is accurate and that you are the rights holder or are authorized to act on behalf of the rights holder; and<\/li><li>An electronic or physical signature of the person authorized to act on behalf of the rights holder.<\/li><\/ol><h6>B. ONCE PROPER BONA FIDE INFRINGEMENT NOTIFICATION IS RECEIVED BY THE DESIGNATED AGENT:<\/h6><p>It is our policy to remove or disable access to the allegedly-infringing Content.<\/p><h6>C. PROCEDURE TO SUPPLY A COUNTER-NOTICE TO THE DESIGNATED AGENT:<\/h6><p>If we believe that the Content that was removed or to which access was disabled is either not infringing, or we believe that we have the right to post and use such Content from the rights owner, the owner's agent, or pursuant to the law (including as a fair use), we will send a counter-notice containing the following information to the Designated Agent listed below:<\/p><ol><li>Identification of the Content that has been removed or disabled, including a description of the where the material in question appeared on the website before it was removed or disabled;<\/li><li>A statement by us, made under penalty of perjury, that we have a good faith belief that the Content was removed or blocked as a result of a mistake or misidentification of the Content in question;<\/li><li>Our contact information, including full name, mailing address, telephone number, and email address;<\/li><li>A statement by us that we consent to the jurisdiction of the Federal Court for the judicial district in which our address is located;<\/li><li>Our electronic or physical signature<\/li><\/ol><p>If a counter-notice is received by the Designated Agent, we may send a copy of the counter-notice to the original complaining party informing that party that we may replace the removed Content or cease disabling it in 10 business days. Unless the rights owner files an action seeking a court order against the member, the removed Content may be replaced, or access to it restored, in 10 to 14 business days or more after receipt of the counter-notice, at our discretion.<\/p><p>Please note that under Section 512(f) of the DMCA, any person who knowingly misrepresents that Content or activity is infringing may be subject to liability for damages, including attorney's fees.<\/p>\n<\/div>",
+        "css_class": "dmca-content",
+        "custom_css": ""
+      }
+    },
+    "1664264106b575a20a": {
+      "type": "contact-form",
+      "blocks": {
+        "224540e7-9ee3-4d66-96e7-1c345fdd2ed8": {
+          "type": "image",
+          "settings": {
+            "logo_display_width": 150,
+            "text": "<p>YOUR CONTACT INFORMATION<\/p>"
+          }
+        },
+        "1664264106c7722a8d-0": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Name<\/p>",
+            "placeholder": "Enter your name",
+            "required": true,
+            "field_type": "text"
+          }
+        },
+        "1664264106c7722a8d-1": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Email<\/p>",
+            "placeholder": "Enter your email",
+            "required": true,
+            "field_type": "email"
+          }
+        },
+        "dcb21941-61c7-44f9-b652-ee23d64c8e6d": {
+          "type": "image",
+          "settings": {
+            "logo_display_width": 150,
+            "text": "<p>CONTENT YOU WANT TO REPORT<\/p>"
+          }
+        },
+        "81b6ee00-1a1a-4873-a84b-fc71fed2ffe6": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Link To The Allegedly Infringing Work<\/p>",
+            "placeholder": "Enter a product link",
+            "required": true,
+            "field_type": "text"
+          }
+        },
+        "1664264106c7722a8d-2": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Description Of The Allegedly Infringing Work<\/p>",
+            "placeholder": "Description of the specific material (orportion thereof) that is claimed to be infringing or be the subject of infringing activity and that is to be removed or access to which is to be disabled",
+            "required": true,
+            "field_type": "textarea"
+          }
+        },
+        "c38478d9-ad79-4340-aaa3-f228cc7787d8": {
+          "type": "image",
+          "settings": {
+            "logo_display_width": 150,
+            "text": "<p>IDENTIFY YOUR WORK<\/p>"
+          }
+        },
+        "5533b628-7243-4e21-99ea-23c756c78611": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Link To The Orginal Work<\/p>",
+            "placeholder": "Enter your name (public)",
+            "required": true,
+            "field_type": "text"
+          }
+        },
+        "83e5553d-27de-4b9e-92bc-8230f4a9e3bb": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Description Of The Original Work<\/p>",
+            "placeholder": "Kindly prove you are the copyright owner of the product",
+            "required": true,
+            "field_type": "text"
+          }
+        },
+        "c915ed61-0e51-427d-afdc-f30275d3c81e": {
+          "type": "richtext",
+          "settings": {
+            "label": "<p>Evidence Of Ownership<\/p>",
+            "placeholder": "No file chosen",
+            "required": true,
+            "field_type": "file"
+          }
+        }
+      },
+      "block_order": [
+        "224540e7-9ee3-4d66-96e7-1c345fdd2ed8",
+        "1664264106c7722a8d-0",
+        "1664264106c7722a8d-1",
+        "dcb21941-61c7-44f9-b652-ee23d64c8e6d",
+        "81b6ee00-1a1a-4873-a84b-fc71fed2ffe6",
+        "1664264106c7722a8d-2",
+        "c38478d9-ad79-4340-aaa3-f228cc7787d8",
+        "5533b628-7243-4e21-99ea-23c756c78611",
+        "83e5553d-27de-4b9e-92bc-8230f4a9e3bb",
+        "c915ed61-0e51-427d-afdc-f30275d3c81e"
+      ],
+      "settings": {
+        "contact_heading": "",
+        "contact_subheading": "",
+        "contact_content": "",
+        "contact_text_position": "center",
+        "contact_text_alignment": "left",
+        "contact_social_buttons": false,
+        "css_class": "dmca-form",
+        "custom_css": ""
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "wide_display": true,
+        "display_first_name": false,
+        "display_last_name": false,
+        "newsletter_title": "Sign up & enjoy 10% OFF",
+        "newsletter_text": "<p>Give us a chance to personalize your stories<\/p>",
+        "newsletter_section_text_align": "center",
+        "banner_image_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0563\/9988\/8539\/files\/NewLetterBackground.svg?v=1660882133",
+        "css_class": "newsletter_section_with_background",
+        "custom_css": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "166426495417b4ff43",
+    "1664264106b575a20a",
+    "newsletter"
+  ]
+}

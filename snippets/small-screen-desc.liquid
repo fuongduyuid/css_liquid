@@ -1,0 +1,66 @@
+<section class="tabbed-content-mb visible-xs is-hidden-desktop-only">
+    <div class="tabbed-items" name='tab1'>
+        <div class="tabbed-title">Description <span class="right "> <svg width="16" height="9" viewBox="0 0 16 9"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L8 6.58579L14.2929 0.292893C14.6834 -0.0976311 15.3166 -0.0976311 15.7071 0.292893C16.0976 0.683417 16.0976 1.31658 15.7071 1.70711L8.70711 8.70711C8.31658 9.09763 7.68342 9.09763 7.29289 8.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z"
+                        fill="#828282"></path>
+                </svg></span></div>
+        <div class="toggle_content de-animated">
+            {% render 'description-section' %}
+        </div>
+    </div>
+    <div class="tabbed-items" name='tab2'>
+        <div class="tabbed-title">Shipping &amp; Return <span class="right "> <svg width="16" height="9"
+                    viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L8 6.58579L14.2929 0.292893C14.6834 -0.0976311 15.3166 -0.0976311 15.7071 0.292893C16.0976 0.683417 16.0976 1.31658 15.7071 1.70711L8.70711 8.70711C8.31658 9.09763 7.68342 9.09763 7.29289 8.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z"
+                        fill="#828282"></path>
+                </svg></span></div>
+        <div class="toggle_content de-animated">
+            {% comment %} {% render 'processing-time' %} {% endcomment %}
+            {% render 'eta-table' %}
+        </div>
+        <!-- <div class="a-line-between-50pct"></div> -->
+    </div>
+    <div class="tabbed-items" name='tab3'>
+        <div class="tabbed-title">Satisfaction Guarantee <span class="right"> <svg width="16" height="9"
+                    viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M0.292893 0.292893C0.683417 -0.0976311 1.31658 -0.0976311 1.70711 0.292893L8 6.58579L14.2929 0.292893C14.6834 -0.0976311 15.3166 -0.0976311 15.7071 0.292893C16.0976 0.683417 16.0976 1.31658 15.7071 1.70711L8.70711 8.70711C8.31658 9.09763 7.68342 9.09763 7.29289 8.70711L0.292893 1.70711C-0.0976311 1.31658 -0.0976311 0.683417 0.292893 0.292893Z"
+                        fill="#828282"></path>
+                </svg></span></div>
+        <div class="toggle_content de-animated">
+          {% render 'guarantee' %}
+        </div>
+    </div>
+</section>
+<!-- Click arrow -->
+<script type="text/javascript">
+    const handleTabTouch = index => {
+        // click find the one with the arrow
+        const matchedEl = document.querySelector(`.tabbed-content-mb .tabbed-items[name="tab${index}"]`);
+        const matchedTitle = matchedEl.querySelector('.tabbed-title')
+        // toggle class active
+        matchedTitle.classList.toggle('active');
+     
+        // animate the content
+        const contentDiv = matchedEl.querySelector('.toggle_content');
+        if(matchedTitle.classList.contains('active')){
+            // contentDiv.style="display: block;"
+            contentDiv.classList.add('animated');
+            contentDiv.classList.remove('de-animated');
+        } else {
+            // contentDiv.style="display: none;"
+            contentDiv.classList.remove('animated');
+            contentDiv.classList.add('de-animated');
+        } 
+    }
+
+    const mbTab1 = document.querySelector('.tabbed-content-mb .tabbed-items[name="tab1"]');
+    mbTab1.addEventListener('click', () => handleTabTouch(1));
+    const mbTab2 = document.querySelector('.tabbed-content-mb .tabbed-items[name="tab2"]');
+    mbTab2.addEventListener('click', () => handleTabTouch(2));
+    const mbTab3 = document.querySelector('.tabbed-content-mb .tabbed-items[name="tab3"]');
+    mbTab3.addEventListener('click', () => handleTabTouch(3));
+</script>

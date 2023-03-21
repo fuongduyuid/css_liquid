@@ -1,0 +1,25 @@
+{% comment %} 
+Variables:
+    item: cart item.
+{% endcomment %}
+{% comment %} This part in charges of showing properties {% endcomment %}
+{% assign tags = item.product.tags %}
+{% if tags contains 'Bulk_size' %}
+  {% assign sizeOptionNames = "Choose Size #1,Choose Size #2,Choose Size #3,Choose Size #4,Choose Size #5,Man's Tee Size,Woman's Tee Size" %}
+  {% if item.properties %}
+    {% comment %} <ul class="meta"> {% endcomment %}
+      {% for p in item.properties %}
+        {% unless p.last == blank %}
+          {% assign firstPart = p.first %}
+          {% assign lastPart = p.last %}
+          {% if sizeOptionNames contains firstPart or sizeOptionNamesMatchingTee contains firstPart or firstPart contains "Tee Size" %}
+            <li>
+                <span class="label">{{ p.first }}: {{ p.last }}</span>
+            </li>
+          {% endif %}
+        {% endunless %}
+    {% endfor %}
+    {% comment %} </ul> {% endcomment %}
+  {% endif %}
+{% endif%}
+{% comment %} End of showing properties {% endcomment %}

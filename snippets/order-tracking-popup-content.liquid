@@ -1,0 +1,33 @@
+<div class="order_tracking--popup_content--wrapper">
+    <div class="fancybox-toolbar custom__fancybox-toolbar">
+        <button data-fancybox-close="" class="fancybox-button custom_btn fancybox-button--close" title="Close" aria-label="close">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M12 10.6L6.6 5.2 5.2 6.6l5.4 5.4-5.4 5.4 1.4 1.4 5.4-5.4 5.4 5.4 1.4-1.4-5.4-5.4 5.4-5.4-1.4-1.4-5.4 5.4z"></path>
+            </svg>
+        </button>
+    </div>    
+    <div class="is-flex image_illustrate">
+        <div class="image_illustrate--item">
+            <img class="image_illustrate--item_image" src="{{section.settings.check_email_svg_link}}">
+            <p class="mobile_sub_title desktop_third_button image_illustrate--item_title text-align-center">{{section.settings.check_email_heading}}</p>
+            <p class="image_illustrate--item_content mobile_notice text-align-center">{{section.settings.check_email_content}}</p>
+        </div>
+        <div class="image_illustrate--item">
+            <img class="image_illustrate--item_image" src="{{section.settings.check_spam_svg_link}}">
+            <p class="mobile_sub_title desktop_third_button image_illustrate--item_title text-align-center">{{section.settings.check_spam_heading}}</p>
+            <p class="image_illustrate--item_content mobile_notice text-align-center">{{section.settings.check_spam_content}}</p>
+        </div>
+    </div>
+    <div class="order_tracking--popup_content--example">
+        <p class="order_tracking--popup_content_text"><b style="font-weight: 600;">From:</b> contact@pawfecthouse.com</p>
+        <p class="order_tracking--popup_content_text"><b style="font-weight: 600;">Subject:</b>
+            <ul class="popup_content--ul"><li>Order #PHNxxxxxx confirmed</li><li>A shipment from order #PHNxxxxxx is on the way</li></ul>
+        </p>
+    </div>
+    <div class="popup_footer">
+        <div class="popup_footer--btns">
+            {% render 'popup-close-button',custom_class: 'poup--custom_close_btn', title: "Got it" %}
+        </div>
+        <a href="/pages/contact-us">Help! I cannot find my order number</a>
+    </div>
+</div>

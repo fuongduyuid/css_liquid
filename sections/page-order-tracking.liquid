@@ -1,0 +1,335 @@
+<script
+    type="application/json"
+    data-section-type="page-order-tracking"
+    data-section-id="{{ section.id }}"
+  >
+</script>
+
+<section class="section ">
+    <div class="section--order_tracking">
+        <p class="mobile_title desktop_secondary_button text-align-center mg_bt--20">{{section.settings.page_title}}</p>
+        <div class="track_content">
+            <div>
+                <p style="text-align: left;" class="track_heading">Enter below information to check the status of your order:</p>
+                <ul class="track_heading--ul">
+                    <li><span><b>Order Number</b> (PHNxxxxxx)<span></li>
+                    <li>or <b>Tracking Number</b></li>
+                </ul>
+            </div>
+
+            <form method="get" action="/apps/shipway_track" class="track_form--custom">
+                <input type="text" class="form-control track_input order_tracking--input" name="order_tracking" placeholder="Enter your Order Number or Tracking Number"> <input type="hidden" name="lang" value=""> <input type="submit" class="btn track_btn mobile_primary_btn" id="scan_order" value="TRACK ORDER">
+            </form>
+
+        </div>
+        <div class="blocks--wrapper">
+            {% comment %} Render poup element {% endcomment %}
+            {% render 'pop-up', 
+                popup_name: 'test_order-tracking',
+            %}
+            <div>
+                <h3 class="mobile_third_btn blocks--wrapper--header">Tracking FAQ</h3>
+                <div class="blocks--wrapper--blocks">
+                    {% for block in section.blocks %}
+                        {% case block.type %}
+                            {% when 'collapsible-tab' %}
+                                {% assign contentValue = block.settings.collapsible_tab_content %}
+                                {% assign defaultOpen = block.settings.collapsible_tab_open %}
+                                    {% if block.settings.collapsible_tab_heading != blank %}
+                                        {% if defaultOpen %}
+                                            <details class="collapsible-tab block--order_tracking--collapsible_tab {{block.settings.collapsible_tab_css_class}}" open>
+                                        {% else %}
+                                            <details class="collapsible-tab block--order_tracking--collapsible_tab {{block.settings.collapsible_tab_css_class}}">
+                                        {% endif%}
+                                                <summary class="collapsible-tab__heading">
+                                                    {{ block.settings.collapsible_tab_heading | escape }}
+                                                </summary>
+                                                {% if block.settings.collapsible_tab_text != blank %}
+                                                    <div class="collapsible-tab__text">
+                                                        {% render 'order-tracking-faq-content', contentValue: contentValue %}
+                                                    </div>
+                                                {% endif %}
+                                            </details>
+                                    {% endif %}
+                        {% endcase %}
+                    {% endfor %}
+                <div class="blocks--wrapper">
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Page Order Tracking",
+    "settings": [
+        {
+            "type": "text",
+            "id": "page_title",
+            "default": "Order Tracking",
+            "label": "Page title"
+        },
+        { "type": "checkbox",
+            "id": "use_popup",
+            "label": "Using popup?"
+        },
+        {
+            "type": "text",
+            "id": "poup_title",
+            "label": "Text of Popup",
+            "default": "I don’t know my order number"
+        },
+        {
+            "type": "text",
+            "id": "check_email_svg_link",
+            "label": "Link to check email svg in popup",
+            "default": "https://cdn.shopify.com/s/files/1/0563/9988/8539/files/Check_Email_-_Popup_Illustration.svg?v=1668584544"
+        },
+        {
+            "type": "text",
+            "id": "check_email_heading",
+            "label": "Check Email text heading",
+            "default": "Check email subject"
+        },
+        {
+            "type": "text",
+            "id": "check_email_content",
+            "label": "Check Email text content",
+            "default": "Your order number and tracking number can be found in the confirmation emails."
+        },
+        {
+            "type": "text",
+            "id": "check_spam_svg_link",
+            "label": "Link to check spam svg in popup",
+            "default": "https://cdn.shopify.com/s/files/1/0563/9988/8539/files/Check_Spam_-_Popup_Illustration.svg?v=1668584544"
+        },
+        {
+            "type": "text",
+            "id": "check_spam_heading",
+            "label": "Check Spam text heading",
+            "default": "Check spam box"
+        },
+        {
+            "type": "text",
+            "id": "check_spam_content",
+            "label": "Check Spam text content",
+            "default": "If you haven’t found them yet, try searching out your promotion/spam folder."
+        }
+    ], 
+    "blocks": [
+      
+        {
+            "type": "collapsible-tab",
+            "name": "Collapsible tab",
+            "settings": [
+              {
+                "type": "text",
+                "id": "collapsible_tab_heading",
+                "label": "Heading",
+                "default": "Collapsible tab"
+              },
+              {
+                "type": "richtext",
+                "id": "collapsible_tab_text",
+                "label": "Text",
+                "default": "<p>Use this text to share information about your product.</p>"
+              },
+              {
+                "type": "select",
+                "id": "collapsible_tab_content",
+                "label": "Content",
+                "options": [
+                  {
+                    "value": "when_to_receive",
+                    "label": "When will I receive my order?"
+                  },
+                  {
+                    "value": "tracking_not_work",
+                    "label": "My tracking number doesn’t work"
+                  },
+                  {
+                    "value": "tracking_not_moving",
+                    "label": "Why is my order tracking not moving?"
+                  }
+                ]
+              },
+              {
+                "type": "checkbox", 
+                "id":"collapsible_tab_open",
+                "label": "Open on default?", 
+                "default": false
+              },
+              {
+                "type":"text",
+                "id": "collapsible_tab_css_class",
+                "label": "CSS class"
+              }
+            ]
+        }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+.mg_bt--20 {
+    margin-bottom: 20px;
+}
+.track_heading {
+    font-size: 14px;
+}
+.fancybox-bg {
+    background-color: #5f5f5ffc !important;
+}
+.product-popup__lightbox {
+    border-radius: 12px;
+}
+.fancybox-button {
+    visibility: hidden !important;
+}
+.fancybox-button.custom_btn {
+    visibility: visible !important;
+    outline: none !important;
+    background: none !important;
+}
+.popup__text, .popup_footer a {
+    color: #3B4148;
+    text-decoration: underline;
+    font-size: 15px;
+}
+
+.custom_popup--lightbox {
+    padding: 24px 10px;
+}
+.section--order_tracking {
+    max-width: 90%;
+    margin: auto;
+    padding: 15px 0 24px;
+}
+.track_content {
+    margin-bottom: 12px;
+}
+.track_heading--ul {
+    padding-left: 24px;
+    font-size: 14px;
+    margin-bottom: 0;
+    background: #FAFAFA;
+    padding: 5px;
+    border-radius: 6px;
+}
+.track_heading--ul li {
+    margin-bottom: 0;
+    margin-left: 24px;
+}
+.track_btn {
+    margin-bottom: 0;
+}
+.order_tracking--input {
+    height: 48px !important;
+    min-height: 48px !important;
+}
+.order_tracking--input::placeholder {
+    font-size: 15px;
+}
+.order_tracking--popup_content--wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+.is-flex.image_illustrate {
+    gap: 15px;
+}
+.image_illustrate--item {
+    width: 50%;
+}
+.order_tracking--popup_content--example {
+    background: #F5F5F6;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+.popup_content--ul {
+    list-style: disc inside;
+    margin-bottom: 0;
+}
+.popup_content--ul li {
+    font-size: 14px;
+    margin-bottom: 2px;
+    margin-left: 16px; 
+}
+.order_tracking--popup_content_text {
+    margin-bottom: 5px;
+}
+.popup_footer {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.poup--custom_close_btn {
+    padding: 10px 100px;
+    background: #0AB9CA;
+    border-radius: 10px;
+    color: #fff;
+}
+.track_form--custom {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+}
+.blocks--wrapper {
+    gap: 32px;
+    display: flex;
+    flex-direction: column;
+}
+.blocks--wrapper--blocks {
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+}
+.block--order_tracking--collapsible_tab {
+    border: none;
+}
+.collapsible-tab__heading {
+    color: #0b8494;
+    display: flex;
+    font-family: Nunito;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 28px;
+    background: #DCF5F8;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 15px;
+}
+.block--order_tracking--collapsible_tab .collapsible-tab__text {
+    padding: 10px 10px 0;
+    font-size: 14px;
+}
+@media only screen and (min-width: 481px) {
+    .custom__fancybox-toolbar {
+        display: block !important;
+        opacity: unset !important;
+    }
+}
+
+@media only screen and (min-width: 799px) {
+    .custom_popup--lightbox {
+        max-width: 65%;
+    }
+    .section--order_tracking {
+        max-width: 50%;
+        padding: 30px 0;
+    }
+    .collapsible-tab__heading {
+        font-size: 16px;
+        line-height: 24px;
+    }
+
+
+}
+@media only screen and (min-width: 1025px) {
+    .custom_popup--lightbox {
+        max-width: 45%;
+    }
+}
+{% endstylesheet %}

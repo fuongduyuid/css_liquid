@@ -1,0 +1,56 @@
+<section class="tabbed-content hidden-xs is-hidden-mobile-only">
+    <nav class="tabs">
+      <ul>
+        <li name='tab1' ><span  class="active">Description</span></li>
+        <li name='tab2' ><span >Shipping &amp; Return</span></li>
+        <li name='tab3' ><span >Satisfaction Guarantee</span></li>
+      </ul>
+    </nav>
+    <div id="tab1" class="item active" data-title="Description">
+      {% render 'description-section' %}
+    </div>
+    <div id="tab2" class="item" data-title="Shipping &amp; Return">
+      {% comment %} {% include 'processing-time' %} {% endcomment %}
+      {% render 'eta-table' %}
+    </div>
+    <div id="tab3" class="item" data-title="Satisfaction Guarantee">
+  {% render 'guarantee' %}
+    </div>
+  </section>
+  <script type="text/javascript">
+  
+    const handleTabClick = index => {
+      // const matchedTabItem = document.querySelector(`.tabbed-content.hidden-xs ul a[href="#tab${index}"]`);
+      const matchedTabItem = document.querySelector(`.tabbed-content.hidden-xs ul li[name="tab${index}"] span`);
+      if (matchedTabItem.classList.contains('active')) {
+        return true;
+      }
+      const allTabItems = Array.from(document.querySelectorAll(`.tabbed-content.hidden-xs ul li span`));
+      // remove the old active one on tab
+      allTabItems.map(i => {
+        if (i.classList.contains('active')) {
+          i.classList.remove('active')
+        }
+      })
+      // set active to the clicked item
+      matchedTabItem.classList.add('active');
+      // remove active out of the section class item
+      const allDetailedSections = Array.from(document.querySelectorAll(`.tabbed-content.hidden-xs div.item`));
+      allDetailedSections.map(i => {
+        if (i.classList.contains('active')) {
+          i.classList.remove('active');
+        }
+      })
+      // set active to the section with id in href of matched item and set it to viewport
+      const matchedDetailSection = document.querySelector(`.tabbed-content.hidden-xs div#tab${index}`);
+      // matchedDetailSection.scrollIntoView()
+      matchedDetailSection.classList.add('active');
+    }
+  
+    const tab1 = document.querySelector('li[name="tab1"]');
+    tab1.addEventListener('click', ()=>handleTabClick(1));
+    const tab2 = document.querySelector('li[name="tab2"]');
+    tab2.addEventListener('click', ()=>handleTabClick(2));
+    const tab3 = document.querySelector('li[name="tab3"]');
+    tab3.addEventListener('click', ()=>handleTabClick(3));
+  </script>
